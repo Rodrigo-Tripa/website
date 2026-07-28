@@ -1,0 +1,10 @@
+Contact: mailto:rodrigojesustripa@proton.me
+Contact: https://github.com/Rodrigo-Tripa
+
+Expires: 2027-12-31T23:59:59Z
+
+Preferred-Languages: en, pt
+
+Canonical: https://rodrigotripa.dev/.well-known/security.txt
+
+Policy: https://rodrigotripa.dev/
