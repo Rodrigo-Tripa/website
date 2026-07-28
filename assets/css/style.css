@@ -1,0 +1,1778 @@
+/* ==========================================================
+   Rodrigo Tripa
+   Personal Portfolio
+   Base Styles
+========================================================== */
+
+/* ==========================================================
+   Reset
+========================================================== */
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ==========================================================
+   Variables
+========================================================== */
+
+:root {
+
+    /* Colors */
+
+    --background: #050505;
+    --surface: #0b0b0b;
+    --surface-light: #111111;
+
+    --border: #1f1f1f;
+
+    --text: #f5f5f5;
+    --text-secondary: #9ca3af;
+
+    --accent: #ffffff;
+
+    /* Typography */
+
+    --font-family: "Inter", sans-serif;
+
+    --fs-xs: 0.875rem;
+    --fs-sm: 1rem;
+    --fs-md: 1.125rem;
+    --fs-lg: 1.5rem;
+    --fs-xl: 2.5rem;
+    --fs-2xl: 4rem;
+
+    --fw-regular: 400;
+    --fw-medium: 500;
+    --fw-semibold: 600;
+    --fw-bold: 700;
+
+    --line-height: 1.7;
+
+    /* Layout */
+
+    --container-width: 1200px;
+
+    --section-padding: 8rem;
+
+    --radius: 18px;
+
+    --transition: 250ms ease;
+
+}
+
+/* ==========================================================
+   HTML
+========================================================== */
+
+html {
+
+    scroll-behavior: smooth;
+
+}
+
+/* ==========================================================
+   Body
+========================================================== */
+
+body {
+
+    background: var(--background);
+
+    color: var(--text);
+
+    font-family: var(--font-family);
+
+    font-size: var(--fs-sm);
+
+    font-weight: var(--fw-regular);
+
+    line-height: var(--line-height);
+
+    -webkit-font-smoothing: antialiased;
+
+    text-rendering: optimizeLegibility;
+
+    overflow-x: hidden;
+
+}
+
+/* ==========================================================
+   Container
+========================================================== */
+
+.container {
+
+    width: min(90%, var(--container-width));
+
+    margin-inline: auto;
+
+}
+
+/* ==========================================================
+   Headings
+========================================================== */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+
+    color: var(--text);
+
+    font-weight: var(--fw-bold);
+
+    line-height: 1.1;
+
+}
+
+h1 {
+
+    font-size: clamp(3rem, 8vw, 6rem);
+
+}
+
+h2 {
+
+    font-size: clamp(2rem, 5vw, 3.5rem);
+
+}
+
+h3 {
+
+    font-size: 1.5rem;
+
+}
+
+/* ==========================================================
+   Paragraphs
+========================================================== */
+
+p {
+
+    color: var(--text-secondary);
+
+}
+
+/* ==========================================================
+   Links
+========================================================== */
+
+a {
+
+    color: inherit;
+
+    text-decoration: none;
+
+    transition: color var(--transition);
+
+}
+
+a:hover {
+
+    color: var(--accent);
+
+}
+
+/* ==========================================================
+   Lists
+========================================================== */
+
+ul {
+
+    list-style: none;
+
+}
+
+/* ==========================================================
+   Images
+========================================================== */
+
+img {
+
+    display: block;
+
+    max-width: 100%;
+
+    height: auto;
+
+}
+
+/* ==========================================================
+   Buttons
+========================================================== */
+
+button {
+
+    font: inherit;
+
+    border: none;
+
+    background: none;
+
+    cursor: pointer;
+
+}
+
+/* ==========================================================
+   Sections
+========================================================== */
+
+section {
+
+    padding-block: var(--section-padding);
+
+}
+
+/* ==========================================================
+   Text Selection
+========================================================== */
+
+::selection {
+
+    background: #ffffff;
+
+    color: #050505;
+
+}
+
+/* ==========================================================
+   Scrollbar
+========================================================== */
+
+::-webkit-scrollbar {
+
+    width: 10px;
+
+}
+
+::-webkit-scrollbar-track {
+
+    background: var(--background);
+
+}
+
+::-webkit-scrollbar-thumb {
+
+    background: #2b2b2b;
+
+    border-radius: 999px;
+
+}
+
+::-webkit-scrollbar-thumb:hover {
+
+    background: #444444;
+
+}
+
+/* ==========================================================
+   Focus
+========================================================== */
+
+:focus-visible {
+
+    outline: 2px solid var(--accent);
+
+    outline-offset: 4px;
+
+}
+/* ==========================================================
+   Header
+========================================================== */
+
+.header {
+
+    position: fixed;
+
+    top: 0;
+
+    left: 0;
+
+    width: 100%;
+
+    z-index: 1000;
+
+    background: rgba(5, 5, 5, 0.80);
+
+    backdrop-filter: blur(20px);
+
+    -webkit-backdrop-filter: blur(20px);
+
+    border-bottom: 1px solid var(--border);
+
+}
+
+/* ==========================================================
+   Header Container
+========================================================== */
+
+.header .container {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    height: 80px;
+
+}
+
+/* ==========================================================
+   Logo
+========================================================== */
+
+.logo {
+
+    font-size: 1.1rem;
+
+    font-weight: var(--fw-semibold);
+
+    color: var(--text);
+
+    letter-spacing: 0.05em;
+
+    transition: opacity var(--transition);
+
+}
+
+.logo:hover {
+
+    opacity: .75;
+
+}
+
+/* ==========================================================
+   Navigation
+========================================================== */
+
+.navbar {
+
+    display: flex;
+
+    align-items: center;
+
+}
+
+.nav-links {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 2.5rem;
+
+}
+
+.nav-links a {
+
+    position: relative;
+
+    color: var(--text-secondary);
+
+    font-size: 0.95rem;
+
+    font-weight: var(--fw-medium);
+
+    transition: color var(--transition);
+
+}
+
+.nav-links a:hover {
+
+    color: var(--text);
+
+}
+
+.nav-links a::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+
+    bottom: -8px;
+
+    width: 100%;
+
+    height: 1px;
+
+    background: var(--accent);
+
+    transform: scaleX(0);
+
+    transform-origin: center;
+
+    transition: transform var(--transition);
+
+}
+
+.nav-links a:hover::after {
+
+    transform: scaleX(1);
+
+}
+
+/* ==========================================================
+   Social Links
+========================================================== */
+
+.social-links {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 1.5rem;
+
+}
+
+.social-links a {
+
+    color: var(--text-secondary);
+
+    font-size: 0.95rem;
+
+    font-weight: var(--fw-medium);
+
+    transition: color var(--transition);
+
+}
+
+.social-links a:hover {
+
+    color: var(--text);
+
+}
+
+/* ==========================================================
+   Mobile Navigation Button
+========================================================== */
+
+.menu-toggle {
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 46px;
+
+    height: 46px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 12px;
+
+    background: var(--surface);
+
+    color: var(--text);
+
+    transition: var(--transition);
+
+}
+
+.menu-toggle:hover {
+
+    background: var(--surface-light);
+
+}
+
+/* ==========================================================
+   Header Spacer
+========================================================== */
+
+body {
+
+    padding-top: 80px;
+
+}
+/* ==========================================================
+   Hero
+========================================================== */
+
+.hero {
+
+    min-height: calc(100vh - 80px);
+
+    display: flex;
+
+    align-items: center;
+
+    position: relative;
+
+}
+
+/* ==========================================================
+   Hero Container
+========================================================== */
+
+.hero-container {
+
+    display: grid;
+
+    grid-template-columns: 1fr 480px;
+
+    align-items: center;
+
+    gap: 6rem;
+
+}
+
+/* ==========================================================
+   Hero Content
+========================================================== */
+
+.hero-content {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 2rem;
+
+    max-width: 650px;
+
+}
+
+/* ==========================================================
+   Hero Tag
+========================================================== */
+
+.hero-tag {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    width: fit-content;
+
+    padding: .5rem 1rem;
+
+    border: 1px solid var(--border);
+
+    border-radius: 999px;
+
+    background: var(--surface);
+
+    color: var(--text-secondary);
+
+    font-size: .85rem;
+
+    font-weight: var(--fw-medium);
+
+    letter-spacing: .08em;
+
+    text-transform: uppercase;
+
+}
+
+/* ==========================================================
+   Hero Title
+========================================================== */
+
+.hero h1 {
+
+    font-size: clamp(4rem, 10vw, 7rem);
+
+    line-height: .9;
+
+    font-weight: 800;
+
+    letter-spacing: -.05em;
+
+    color: var(--text);
+
+}
+
+/* ==========================================================
+   Hero Description
+========================================================== */
+
+.hero-description {
+
+    max-width: 600px;
+
+    font-size: 1.2rem;
+
+    line-height: 1.8;
+
+    color: var(--text-secondary);
+
+}
+
+/* ==========================================================
+   Hero Buttons
+========================================================== */
+
+.hero-buttons {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 1rem;
+
+    margin-top: 1rem;
+
+}
+
+/* ==========================================================
+   Buttons
+========================================================== */
+
+.btn {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 1rem 1.8rem;
+
+    border-radius: 14px;
+
+    font-size: .95rem;
+
+    font-weight: var(--fw-semibold);
+
+    transition: all var(--transition);
+
+}
+
+.btn-primary {
+
+    background: var(--text);
+
+    color: var(--background);
+
+}
+
+.btn-primary:hover {
+
+    transform: translateY(-3px);
+
+    background: #ffffff;
+
+}
+
+.btn-secondary {
+
+    background: transparent;
+
+    color: var(--text);
+
+    border: 1px solid var(--border);
+
+}
+
+.btn-secondary:hover {
+
+    background: var(--surface);
+
+    border-color: #333333;
+
+    transform: translateY(-3px);
+
+}
+
+/* ==========================================================
+   Hero Image
+========================================================== */
+
+.hero-image {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    position: relative;
+
+}
+
+/* Background Glow */
+
+.hero-image::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 550px;
+
+    height: 550px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,255,255,.04) 0%,
+            transparent 70%
+        );
+
+    filter: blur(60px);
+
+    z-index: -1;
+
+}
+
+/* Profile */
+
+.hero-image img {
+
+    width: 100%;
+
+    max-width: 430px;
+
+    aspect-ratio: 4 / 5;
+
+    object-fit: cover;
+
+    border-radius: 0px;
+
+    border: 1px solid var(--border);
+
+    filter:
+        grayscale(100%)
+        contrast(115%)
+        brightness(.82);
+
+    transition:
+        transform .5s ease,
+        filter .5s ease,
+        border-color .5s ease;
+
+}
+
+/* Hover */
+
+.hero-image img:hover {
+
+    transform: translateY(-8px);
+
+    filter:
+        grayscale(25%)
+        contrast(110%)
+        brightness(.92);
+
+    border-color: #444444;
+
+}
+
+/* ==========================================================
+   Hero Scroll Indicator
+========================================================== */
+
+.hero::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+
+    bottom: 2rem;
+
+    width: 1px;
+
+    height: 60px;
+
+    background:
+        linear-gradient(
+            transparent,
+            var(--border),
+            transparent
+        );
+
+    transform: translateX(-50%);
+
+    opacity: .7;
+
+}
+/* ==========================================================
+   Projects
+========================================================== */
+
+.projects {
+
+    position: relative;
+
+}
+
+/* ==========================================================
+   Section Header
+========================================================== */
+
+.section-header {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 1rem;
+
+    margin-bottom: 5rem;
+
+    max-width: 700px;
+
+}
+
+.section-tag {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    width: fit-content;
+
+    padding: .45rem 1rem;
+
+    border: 1px solid var(--border);
+
+    border-radius: 999px;
+
+    background: var(--surface);
+
+    color: var(--text-secondary);
+
+    font-size: .8rem;
+
+    font-weight: var(--fw-medium);
+
+    text-transform: uppercase;
+
+    letter-spacing: .08em;
+
+}
+
+.section-header h2 {
+
+    font-size: clamp(2.5rem, 5vw, 4rem);
+
+}
+
+.section-header p {
+
+    max-width: 650px;
+
+    font-size: 1.1rem;
+
+}
+
+/* ==========================================================
+   Projects Grid
+========================================================== */
+
+.projects-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 2rem;
+
+}
+
+/* ==========================================================
+   Project Card
+========================================================== */
+
+.project-card {
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    min-height: 320px;
+
+    padding: 2.25rem;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+
+    border-radius: 10px;
+
+    transition:
+        transform .35s ease,
+        border-color .35s ease,
+        background .35s ease,
+        box-shadow .35s ease;
+
+}
+
+.project-card:hover {
+
+    transform: translateY(-8px);
+
+    border-color: #353535;
+
+    background: #101010;
+
+    box-shadow:
+        0 15px 45px rgba(0,0,0,.35);
+
+}
+
+/* ==========================================================
+   Project Content
+========================================================== */
+
+.project-content {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 1.25rem;
+
+}
+
+.project-content h3 {
+
+    font-size: 1.6rem;
+
+    font-weight: var(--fw-bold);
+
+    color: var(--text);
+
+}
+
+.project-content p {
+
+    color: var(--text-secondary);
+
+    line-height: 1.8;
+
+}
+
+/* ==========================================================
+   Technologies
+========================================================== */
+
+.project-stack {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: .75rem;
+
+    margin-top: .5rem;
+
+}
+
+.project-stack li {
+
+    padding: .45rem .85rem;
+
+    border: 1px solid var(--border);
+
+    border-radius: 999px;
+
+    background: #090909;
+
+    color: var(--text-secondary);
+
+    font-size: .82rem;
+
+    font-weight: var(--fw-medium);
+
+}
+
+/* ==========================================================
+   Project Link
+========================================================== */
+
+.project-link {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: .6rem;
+
+    margin-top: 2rem;
+
+    width: fit-content;
+
+    color: var(--text);
+
+    font-weight: var(--fw-semibold);
+
+    transition: gap .25s ease;
+
+}
+
+.project-link::after {
+
+    content: "→";
+
+    transition: transform .25s ease;
+
+}
+
+.project-link:hover {
+
+    gap: 1rem;
+
+}
+
+.project-link:hover::after {
+
+    transform: translateX(6px);
+
+}
+/* ==========================================================
+   About
+========================================================== */
+
+.about {
+
+    position: relative;
+
+}
+
+.about-content {
+
+    max-width: 850px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 2rem;
+
+}
+
+.about-content p {
+
+    font-size: 1.1rem;
+
+    line-height: 1.9;
+
+    color: var(--text-secondary);
+
+}
+
+.about-content strong {
+
+    color: var(--text);
+
+    font-weight: var(--fw-semibold);
+
+}
+
+/* ==========================================================
+   Contact
+========================================================== */
+
+.contact {
+
+    position: relative;
+
+}
+
+/* ==========================================================
+   Contact Grid
+========================================================== */
+
+.contact-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 1.5rem;
+
+    margin-top: 4rem;
+
+}
+
+/* ==========================================================
+   Contact Card
+========================================================== */
+
+.contact-card {
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    gap: .8rem;
+
+    min-height: 180px;
+
+    padding: 2rem;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+
+    border-radius: 10px;
+
+    transition:
+        transform .35s ease,
+        background .35s ease,
+        border-color .35s ease,
+        box-shadow .35s ease;
+
+}
+
+.contact-card:hover {
+
+    transform: translateY(-8px);
+
+    background: #101010;
+
+    border-color: #343434;
+
+    box-shadow:
+        0 18px 45px rgba(0,0,0,.35);
+
+}
+
+/* ==========================================================
+   Contact Title
+========================================================== */
+
+.contact-title {
+
+    color: var(--text);
+
+    font-size: 1.15rem;
+
+    font-weight: var(--fw-semibold);
+
+    letter-spacing: .02em;
+
+}
+
+/* ==========================================================
+   Contact Value
+========================================================== */
+
+.contact-value {
+
+    color: var(--text-secondary);
+
+    font-size: .95rem;
+
+    line-height: 1.7;
+
+    word-break: break-word;
+
+    transition: color var(--transition);
+
+}
+
+.contact-card:hover .contact-value {
+
+    color: var(--text);
+
+}
+
+/* ==========================================================
+   Contact Icon (Future)
+========================================================== */
+
+.contact-icon {
+
+    width: 42px;
+
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin-bottom: .5rem;
+
+    color: var(--text);
+
+}
+
+/* ==========================================================
+   Contact Divider
+========================================================== */
+
+.contact::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 80px;
+
+    height: 1px;
+
+    background: var(--border);
+
+}
+/* ==========================================================
+   Footer
+========================================================== */
+
+.footer {
+
+    border-top: 1px solid var(--border);
+
+    background: var(--background);
+
+}
+
+/* ==========================================================
+   Footer Container
+========================================================== */
+
+.footer-container {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 6rem;
+
+    padding-block: 5rem;
+
+}
+
+/* ==========================================================
+   Footer Brand
+========================================================== */
+
+.footer-brand {
+
+    max-width: 420px;
+
+}
+
+.footer-brand h2 {
+
+    font-size: 1.6rem;
+
+    margin-bottom: 1rem;
+
+}
+
+.footer-brand p {
+
+    color: var(--text-secondary);
+
+    line-height: 1.8;
+
+}
+
+/* ==========================================================
+   Footer Links
+========================================================== */
+
+.footer-links {
+
+    display: flex;
+
+    gap: 5rem;
+
+}
+
+.footer-column {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 1.2rem;
+
+}
+
+.footer-column h3 {
+
+    font-size: .95rem;
+
+    font-weight: var(--fw-semibold);
+
+    color: var(--text);
+
+    text-transform: uppercase;
+
+    letter-spacing: .08em;
+
+}
+
+.footer-column ul {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 1rem;
+
+}
+
+.footer-column a {
+
+    color: var(--text-secondary);
+
+    transition:
+        color var(--transition),
+        transform var(--transition);
+
+}
+
+.footer-column a:hover {
+
+    color: var(--text);
+
+    transform: translateX(6px);
+
+}
+
+/* ==========================================================
+   Footer Bottom
+========================================================== */
+
+.footer-bottom {
+
+    border-top: 1px solid var(--border);
+
+}
+
+.footer-bottom .container {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-height: 80px;
+
+}
+
+.footer-bottom p {
+
+    color: var(--text-secondary);
+
+    font-size: .9rem;
+
+}
+
+/* ==========================================================
+   Back To Top
+========================================================== */
+
+.back-to-top {
+
+    position: fixed;
+
+    right: 2rem;
+
+    bottom: 2rem;
+
+    width: 52px;
+
+    height: 52px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border: 1px solid var(--border);
+
+    border-radius: 50%;
+
+    background: rgba(12, 12, 12, .92);
+
+    backdrop-filter: blur(12px);
+
+    -webkit-backdrop-filter: blur(12px);
+
+    color: var(--text);
+
+    font-size: 1.1rem;
+
+    cursor: pointer;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transform: translateY(20px);
+
+    transition:
+        opacity .3s ease,
+        visibility .3s ease,
+        transform .3s ease,
+        background .3s ease,
+        border-color .3s ease;
+
+    z-index: 999;
+
+}
+
+.back-to-top.show {
+
+    opacity: 1;
+
+    visibility: visible;
+
+    transform: translateY(0);
+
+}
+
+.back-to-top:hover {
+
+    background: #141414;
+
+    border-color: #3a3a3a;
+
+    transform: translateY(-4px);
+
+}
+
+/* ==========================================================
+   Footer Utilities
+========================================================== */
+
+.footer a:focus-visible,
+.back-to-top:focus-visible {
+
+    outline: 2px solid var(--accent);
+
+    outline-offset: 4px;
+
+}
+/* ==========================================================
+   Responsive Design
+========================================================== */
+
+/* ==========================================================
+   Large Screens
+========================================================== */
+
+@media (max-width: 1200px) {
+
+    .container {
+
+        width: min(92%, var(--container-width));
+
+    }
+
+    .hero-container {
+
+        gap: 4rem;
+
+        grid-template-columns: 1fr 420px;
+
+    }
+
+    .projects-grid {
+
+        gap: 1.5rem;
+
+    }
+
+}
+
+/* ==========================================================
+   Tablets
+========================================================== */
+
+@media (max-width: 992px) {
+
+    .header .container {
+
+        height: 72px;
+
+    }
+
+    body {
+
+        padding-top: 72px;
+
+    }
+
+    .navbar {
+
+        display: none;
+
+    }
+
+    .social-links {
+
+        display: none;
+
+    }
+
+    .menu-toggle {
+
+        display: flex;
+
+    }
+
+    .hero {
+
+        min-height: auto;
+
+        padding-block: 6rem;
+
+    }
+
+    .hero-container {
+
+        grid-template-columns: 1fr;
+
+        gap: 4rem;
+
+        text-align: center;
+
+    }
+
+    .hero-content {
+
+        max-width: 100%;
+
+        align-items: center;
+
+    }
+
+    .hero-description {
+
+        max-width: 700px;
+
+    }
+
+    .hero-buttons {
+
+        justify-content: center;
+
+        flex-wrap: wrap;
+
+    }
+
+    .hero-image {
+
+        order: -1;
+
+    }
+
+    .hero-image img {
+
+        max-width: 380px;
+
+    }
+
+    .projects-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .contact-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .footer-container {
+
+        flex-direction: column;
+
+        gap: 3rem;
+
+    }
+
+    .footer-links {
+
+        gap: 3rem;
+
+    }
+
+}
+
+/* ==========================================================
+   Mobile
+========================================================== */
+
+@media (max-width: 768px) {
+
+    :root {
+
+        --section-padding: 6rem;
+
+    }
+
+    h1 {
+
+        font-size: clamp(3rem, 12vw, 4.5rem);
+
+    }
+
+    h2 {
+
+        font-size: clamp(2rem, 8vw, 3rem);
+
+    }
+
+    .hero-description {
+
+        font-size: 1rem;
+
+    }
+
+    .hero-image img {
+
+        max-width: 320px;
+
+    }
+
+    .btn {
+
+        width: 100%;
+
+    }
+
+    .hero-buttons {
+
+        width: 100%;
+
+        flex-direction: column;
+
+    }
+
+    .project-card {
+
+        padding: 1.75rem;
+
+    }
+
+    .contact-card {
+
+        min-height: 160px;
+
+        padding: 1.75rem;
+
+    }
+
+    .footer-links {
+
+        flex-direction: column;
+
+        gap: 2.5rem;
+
+    }
+
+    .back-to-top {
+
+        right: 1.25rem;
+
+        bottom: 1.25rem;
+
+    }
+
+}
+
+/* ==========================================================
+   Small Phones
+========================================================== */
+
+@media (max-width: 576px) {
+
+    .container {
+
+        width: 94%;
+
+    }
+
+    .hero {
+
+        padding-top: 3rem;
+
+    }
+
+    .hero-tag {
+
+        font-size: .75rem;
+
+    }
+
+    .hero-image img {
+
+        max-width: 260px;
+
+    }
+
+    .project-card {
+
+        min-height: auto;
+
+        padding: 1.5rem;
+
+    }
+
+    .project-stack {
+
+        gap: .5rem;
+
+    }
+
+    .project-stack li {
+
+        font-size: .75rem;
+
+        padding: .4rem .75rem;
+
+    }
+
+    .section-header {
+
+        margin-bottom: 3rem;
+
+    }
+
+    .contact-card {
+
+        min-height: 140px;
+
+    }
+
+    .footer-brand h2 {
+
+        font-size: 1.4rem;
+
+    }
+
+    .footer-bottom p {
+
+        font-size: .8rem;
+
+        text-align: center;
+
+    }
+
+}
