@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- Basic -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO -->
+    <title>Knowledge Graph | Rodrigo Tripa</title>
+    <meta name="description" content="Interactive visualization of my Cyber Notes knowledge base.">
+
+    <!-- Theme -->
+    <meta name="theme-color" content="#050505">
+
+    <!-- Icons -->
+    <link rel="icon" href="/assets/icons/favicon.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/knowledge.css">
+
+</head>
+
+<body>
+
+    <header class="topbar">
+
+        <a href="/" class="logo">
+            Rodrigo Tripa
+        </a>
+
+        <nav>
+
+            <a href="/">Home</a>
+
+            <a href="https://github.com/Rodrigo-Tripa/Cyber-Notes"
+               target="_blank"
+               rel="noopener noreferrer">
+
+                Cyber Notes
+
+            </a>
+
+        </nav>
+
+    </header>
+
+    <main>
+
+        <section class="graph-container">
+
+            <div id="cy"></div>
+
+        </section>
+
+        <aside class="sidebar">
+
+            <h2>Knowledge Graph</h2>
+
+            <p>
+                Select a node to display information about the note.
+            </p>
+
+            <hr>
+
+            <div id="node-info">
+
+                <h3>No node selected</h3>
+
+                <p>
+                    Click a node in the graph.
+                </p>
+
+            </div>
+
+        </aside>
+
+    </main>
+
+    <script src="https://unpkg.com/cytoscape/dist/cytoscape.min.js"></script>
+
+    <script src="/assets/js/knowledge.js"></script>
+
+</body>
+
+</html>
