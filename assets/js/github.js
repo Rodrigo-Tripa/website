@@ -35,15 +35,28 @@ async function fetchRepositoryTree() {
 
 async function fetchMarkdown(path) {
 
-    const url =
-        `https://api.rodrigotripa.dev/repos/${REPO_OWNER}/${REPO_NAME}/contents/${path}`;
+    const encodedPath = path
+        .split("/")
+        .map(encodeURIComponent)
+        .join("/");
 
-    const response = await fetch(url);
+    const url =
+        `https://api.rodrigotripa.dev/repos/${REPO_OWNER}/${REPO_NAME}/contents/${encodedPath}`;
+
+    const response = await fetch(url, {
+        headers: getGitHubHeaders()
+    });
 
     if (!response.ok) {
         throw new Error(`Unable to load ${path}`);
     }
 
-    return await response.text();
+    const file = await response.json();
+
+    if (file.encoding !== "base64") {
+        throw new Error("Unsupported encoding");
+    }
+
+    return atob(file.content.replace(/\n/g, ""));
 
 }
