@@ -1922,3 +1922,79 @@ body {
 		padding: 1.5rem;
 	}
 }
+/* ==========================================================
+   Correção: Menu Mobile (dropdown ao clicar em ☰)
+   O JS (main.js) já alternava a classe .active na .navbar,
+   mas faltava o CSS para a tornar visível.
+========================================================== */
+
+@keyframes mobileMenuFade {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 992px) {
+
+    .navbar.active {
+        display: flex;
+        position: fixed;
+        top: 72px;
+        left: 0;
+        width: 100%;
+        max-height: calc(100vh - 72px);
+        overflow-y: auto;
+        background: var(--background);
+        border-bottom: 1px solid var(--border);
+        flex-direction: column;
+        align-items: stretch;
+        padding: 0.5rem 0;
+        z-index: 999;
+        animation: mobileMenuFade 0.2s ease;
+    }
+
+    .navbar.active .nav-links {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        width: 100%;
+    }
+
+    .navbar.active .nav-links li {
+        width: 100%;
+    }
+
+    .navbar.active .nav-links a {
+        display: block;
+        width: 100%;
+        padding: 1rem 6%;
+        border-bottom: 1px solid var(--border);
+        font-size: 1.05rem;
+    }
+
+    .navbar.active .nav-links a::after {
+        display: none;
+    }
+
+    .navbar.active .nav-links a:hover,
+    .navbar.active .nav-links a.active {
+        background: var(--surface);
+        color: var(--text);
+    }
+
+    .menu-toggle.active {
+        background: var(--surface-light);
+        border-color: var(--text-secondary);
+    }
+
+    /* Bloqueia o scroll do body atrás do menu aberto (o JS já faz
+       isto via document.body.style.overflow, isto é só reforço) */
+    body:has(.navbar.active) {
+        overflow: hidden;
+    }
+}

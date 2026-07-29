@@ -48,3 +48,6 @@ build/
 # ==========================
 
 .cache/
+fix-mobile-menu.sh
+ttt.txt
+assets/css/style.css.bak
