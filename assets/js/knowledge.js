@@ -1,162 +1,40 @@
-const cy = cytoscape({
+let cy;
 
-    container: document.getElementById("cy"),
+async function init() {
 
-    elements: [
+    try {
 
-        // Nodes
+        const tree = await fetchRepositoryTree();
 
-        {
-            data: {
-                id: "Cyber Notes",
-                label: "Cyber Notes"
-            }
-        },
+        const elements = buildGraphElements(tree);
 
-        {
-            data: {
-                id: "Linux",
-                label: "Linux"
-            }
-        },
+        console.log(tree);
+        console.log(elements);
+        console.log(elements.nodes);
 
-        {
-            data: {
-                id: "Networking",
-                label: "Networking"
-            }
-        },
+        console.log("Nodes:", elements.nodes.length);
+        console.log("Edges:", elements.edges.length);
 
-        {
-            data: {
-                id: "Cryptography",
-                label: "Cryptography"
-            }
-        },
+        console.log("Primeiro nó:", elements.nodes[0]);
+        console.log("Primeira edge:", elements.edges[0]);
 
-        {
-            data: {
-                id: "Python",
-                label: "Python"
-            }
-        },
+        window.elements = elements;
 
-        {
-            data: {
-                id: "Docker",
-                label: "Docker"
-            }
-        },
+        cy = createGraph(elements);
 
-        // Edges
+        initializeUI(cy, tree);
 
-        {
-            data: {
-                source: "Cyber Notes",
-                target: "Linux"
-            }
-        },
+    } catch (error) {
 
-        {
-            data: {
-                source: "Cyber Notes",
-                target: "Networking"
-            }
-        },
+        console.error(error);
 
-        {
-            data: {
-                source: "Cyber Notes",
-                target: "Cryptography"
-            }
-        },
-
-        {
-            data: {
-                source: "Cyber Notes",
-                target: "Python"
-            }
-        },
-
-        {
-            data: {
-                source: "Cyber Notes",
-                target: "Docker"
-            }
-        }
-
-    ],
-
-    style: [
-
-        {
-            selector: "node",
-
-            style: {
-
-                "background-color": "#ffffff",
-
-                "label": "data(label)",
-
-                "color": "#ffffff",
-
-                "font-size": "12px",
-
-                "text-valign": "bottom",
-
-                "text-margin-y": "8px",
-
-                "text-outline-width": 0
-
-            }
-
-        },
-
-        {
-            selector: "edge",
-
-            style: {
-
-                "line-color": "#444",
-
-                "width": 1.5,
-
-                "curve-style": "bezier"
-
-            }
-
-        }
-
-    ],
-
-    layout: {
-
-        name: "cose",
-
-        animate: true,
-
-        fit: true,
-
-        padding: 50
-
+        document.getElementById("node-info").innerHTML = `
+            <h3>Error</h3>
+            <p>${error.message}</p>
+        `;
     }
 
-});
+}
 
-const info = document.getElementById("node-info");
 
-cy.on("tap", "node", (event) => {
-
-    const node = event.target;
-
-    info.innerHTML = `
-
-        <h3>${node.id()}</h3>
-
-        <p>This note will eventually be loaded automatically from GitHub.</p>
-
-        <p><strong>ID:</strong> ${node.id()}</p>
-
-    `;
-
-});
+document.addEventListener("DOMContentLoaded", init);
