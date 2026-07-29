@@ -4,7 +4,7 @@
 ========================================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
-    const API_ENDPOINT = "https://api.rodrigotripa.dev/chat";
+    const API_ENDPOINT = "https://api.rodrigotripa.dev/";
 
     const chatHistory = document.getElementById("chat-history");
     const chatForm = document.getElementById("chat-form");
