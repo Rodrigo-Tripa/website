@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const navbar = document.querySelector(".navbar");
     const navLinks = document.querySelectorAll('.nav-links a');
     const backToTop = document.getElementById("back-to-top");
+    const sections = document.querySelectorAll("section");
     const revealElements = document.querySelectorAll(
         ".hero, .section-header, .project-card, .about-content, .contact-card, .footer"
     );
@@ -76,7 +77,6 @@ document.addEventListener("DOMContentLoaded", () => {
     /* ==========================================================
        4. Active Navigation & Smooth Scroll
        ========================================================== */
-    const sections = document.querySelectorAll("section[id]");
 
     function updateActiveSection(scrollY) {
         if (sections.length === 0) return;
