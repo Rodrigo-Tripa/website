@@ -1,0 +1,971 @@
+/* ==========================================================
+   Projects Page
+========================================================== */
+
+/* ==========================================================
+   Page Hero
+========================================================== */
+
+.hero {
+
+	min-height: 70vh;
+
+}
+
+.hero-content {
+
+	max-width: 760px;
+
+}
+
+.hero-description {
+
+	max-width: 650px;
+
+}
+
+/* ==========================================================
+   Featured Projects
+========================================================== */
+
+.projects {
+
+	position: relative;
+
+}
+
+.projects::before {
+
+	content: "";
+
+	position: absolute;
+
+	top: 0;
+
+	left: 50%;
+
+	transform: translateX(-50%);
+
+	width: 80px;
+
+	height: 1px;
+
+	background: var(--border);
+
+}
+
+/* ==========================================================
+   Project Category
+========================================================== */
+
+.project-category {
+
+	display: inline-flex;
+
+	align-items: center;
+
+	width: fit-content;
+
+	padding: .45rem .9rem;
+
+	border: 1px solid var(--border);
+
+	border-radius: 999px;
+
+	background: #090909;
+
+	color: var(--text-secondary);
+
+	font-size: .75rem;
+
+	font-weight: var(--fw-semibold);
+
+	text-transform: uppercase;
+
+	letter-spacing: .08em;
+
+}
+
+/* ==========================================================
+   Project Technologies
+========================================================== */
+
+.project-tags {
+
+	display: flex;
+
+	flex-wrap: wrap;
+
+	gap: .75rem;
+
+	margin-top: .75rem;
+
+}
+
+.project-tags span {
+
+	display: inline-flex;
+
+	align-items: center;
+
+	padding: .45rem .85rem;
+
+	border: 1px solid var(--border);
+
+	border-radius: 999px;
+
+	background: #090909;
+
+	color: var(--text-secondary);
+
+	font-size: .8rem;
+
+	font-weight: var(--fw-medium);
+
+	transition:
+
+		background .25s ease,
+
+		border-color .25s ease,
+
+		color .25s ease;
+
+}
+
+.project-card:hover .project-tags span {
+
+	background: #131313;
+
+	border-color: #333333;
+
+	color: var(--text);
+
+}
+
+/* ==========================================================
+   Project Status
+========================================================== */
+
+.project-status {
+
+	display: inline-flex;
+
+	align-items: center;
+
+	gap: .5rem;
+
+	margin-bottom: 1.5rem;
+
+	font-size: .82rem;
+
+	font-weight: var(--fw-semibold);
+
+	color: var(--text-secondary);
+
+	text-transform: uppercase;
+
+	letter-spacing: .08em;
+
+}
+
+.project-status::before {
+
+	content: "";
+
+	width: 8px;
+
+	height: 8px;
+
+	border-radius: 50%;
+
+	background: #38d26b;
+
+}
+
+/* ==========================================================
+   Featured Project
+========================================================== */
+
+.featured-project {
+
+	display: grid;
+
+	grid-template-columns: 1.3fr .7fr;
+
+	gap: 3rem;
+
+	padding: 3rem;
+
+	background: linear-gradient(
+		180deg,
+		#101010 0%,
+		var(--surface) 100%
+	);
+
+	border: 1px solid var(--border);
+
+	border-radius: 14px;
+
+	margin-bottom: 5rem;
+
+	overflow: hidden;
+
+	position: relative;
+
+}
+
+.featured-project::before {
+
+	content: "";
+
+	position: absolute;
+
+	top: 0;
+
+	left: 0;
+
+	width: 4px;
+
+	height: 100%;
+
+	background: var(--text);
+
+	opacity: .08;
+
+}
+
+/* ==========================================================
+   Featured Content
+========================================================== */
+
+.featured-content {
+
+	display: flex;
+
+	flex-direction: column;
+
+	gap: 1.75rem;
+
+}
+
+.featured-content h2 {
+
+	font-size: clamp(2rem, 4vw, 3rem);
+
+	line-height: 1.15;
+
+}
+
+.featured-content p {
+
+	color: var(--text-secondary);
+
+	line-height: 1.9;
+
+	max-width: 720px;
+
+}
+
+/* ==========================================================
+   Project Meta
+========================================================== */
+
+.project-meta {
+
+	display: flex;
+
+	flex-wrap: wrap;
+
+	gap: 1rem;
+
+	margin-top: .5rem;
+
+}
+
+.project-meta span {
+
+	display: inline-flex;
+
+	align-items: center;
+
+	padding: .55rem .9rem;
+
+	border: 1px solid var(--border);
+
+	border-radius: 999px;
+
+	background: #090909;
+
+	font-size: .82rem;
+
+	color: var(--text-secondary);
+
+}
+
+/* ==========================================================
+   Project Actions
+========================================================== */
+
+.project-actions {
+
+	display: flex;
+
+	flex-wrap: wrap;
+
+	gap: 1rem;
+
+	margin-top: 2rem;
+
+}
+
+/* ==========================================================
+   Project Cards
+========================================================== */
+
+.project-card {
+
+	position: relative;
+
+	overflow: hidden;
+
+}
+
+.project-card::before {
+
+	content: "";
+
+	position: absolute;
+
+	inset: 0;
+
+	background: linear-gradient(
+		180deg,
+		transparent,
+		rgba(255,255,255,.015)
+	);
+
+	opacity: 0;
+
+	transition: opacity .35s ease;
+
+	pointer-events: none;
+
+}
+
+.project-card:hover::before {
+
+	opacity: 1;
+
+}
+
+.project-card:hover h3 {
+
+	color: #ffffff;
+
+}
+
+.project-card:hover .project-category {
+
+	border-color: #383838;
+
+	color: var(--text);
+
+}
+
+/* ==========================================================
+   Project Links
+========================================================== */
+
+.project-link {
+
+	margin-top: auto;
+
+}
+
+.project-link::after {
+
+	font-weight: bold;
+
+}
+
+/* ==========================================================
+   Card Divider
+========================================================== */
+
+.project-content hr {
+
+	border: none;
+
+	height: 1px;
+
+	background: var(--border);
+
+	margin: .5rem 0;
+
+}
+
+/* ==========================================================
+   Open Source Section
+========================================================== */
+
+.open-source {
+
+	position: relative;
+
+}
+
+.open-source-content {
+
+	max-width: 900px;
+
+	display: flex;
+
+	flex-direction: column;
+
+	gap: 2rem;
+
+}
+
+.open-source-content p {
+
+	color: var(--text-secondary);
+
+	line-height: 1.9;
+
+}
+
+.open-source-actions {
+
+	display: flex;
+
+	flex-wrap: wrap;
+
+	gap: 1rem;
+
+	margin-top: 1rem;
+
+}
+
+/* ==========================================================
+   Project Statistics
+========================================================== */
+
+.project-stats {
+
+	display: grid;
+
+	grid-template-columns: repeat(4, 1fr);
+
+	gap: 1.5rem;
+
+	margin-top: 4rem;
+
+}
+
+.project-stat {
+
+	display: flex;
+
+	flex-direction: column;
+
+	align-items: center;
+
+	justify-content: center;
+
+	padding: 2rem;
+
+	background: var(--surface);
+
+	border: 1px solid var(--border);
+
+	border-radius: 12px;
+
+	transition:
+		transform .35s ease,
+		border-color .35s ease,
+		background .35s ease;
+
+}
+
+.project-stat:hover {
+
+	transform: translateY(-6px);
+
+	background: #101010;
+
+	border-color: #353535;
+
+}
+
+.project-stat h3 {
+
+	font-size: clamp(2rem, 5vw, 3rem);
+
+	font-weight: var(--fw-bold);
+
+	color: var(--text);
+
+}
+
+.project-stat span {
+
+	margin-top: .75rem;
+
+	color: var(--text-secondary);
+
+	font-size: .9rem;
+
+	text-align: center;
+
+	text-transform: uppercase;
+
+	letter-spacing: .08em;
+
+}
+
+/* ==========================================================
+   Card Animations
+========================================================== */
+
+.project-card {
+
+	transition:
+
+		transform .35s ease,
+
+		border-color .35s ease,
+
+		background .35s ease,
+
+		box-shadow .35s ease;
+
+}
+
+.project-card h3 {
+
+	transition: color .25s ease;
+
+}
+
+.project-card p {
+
+	transition: color .25s ease;
+
+}
+
+.project-card:hover p {
+
+	color: var(--text);
+
+}
+
+.project-card:hover .project-link {
+
+	gap: 1rem;
+
+}
+
+.project-card:hover .project-link::after {
+
+	transform: translateX(6px);
+
+}
+
+/* ==========================================================
+   Project Divider
+========================================================== */
+
+.projects + .projects {
+
+	margin-top: 2rem;
+
+}
+
+/* ==========================================================
+   Empty State
+========================================================== */
+
+.project-empty {
+
+	display: flex;
+
+	flex-direction: column;
+
+	align-items: center;
+
+	justify-content: center;
+
+	text-align: center;
+
+	padding: 5rem 2rem;
+
+	border: 1px dashed var(--border);
+
+	border-radius: 12px;
+
+	background: var(--surface);
+
+}
+
+.project-empty h3 {
+
+	margin-bottom: 1rem;
+
+}
+
+.project-empty p {
+
+	max-width: 600px;
+
+	color: var(--text-secondary);
+
+	line-height: 1.8;
+
+}
+
+/* ==========================================================
+   Fade In
+========================================================== */
+
+.project-card {
+
+	animation: projectFade .5s ease both;
+
+}
+
+@keyframes projectFade {
+
+	from {
+
+		opacity: 0;
+
+		transform: translateY(20px);
+
+	}
+
+	to {
+
+		opacity: 1;
+
+		transform: translateY(0);
+
+	}
+
+}
+
+/* ==========================================================
+   Responsive
+========================================================== */
+
+/* ==========================================================
+   Laptops
+========================================================== */
+
+@media (max-width: 1200px) {
+
+	.featured-project {
+
+		grid-template-columns: 1fr;
+
+		gap: 2.5rem;
+
+		padding: 2.5rem;
+
+	}
+
+	.project-stats {
+
+		grid-template-columns: repeat(2, 1fr);
+
+	}
+
+}
+
+/* ==========================================================
+   Tablets
+========================================================== */
+
+@media (max-width: 992px) {
+
+	.hero {
+
+		min-height: auto;
+
+		padding-block: 5rem;
+
+	}
+
+	.featured-project {
+
+		padding: 2rem;
+
+		border-radius: 12px;
+
+	}
+
+	.featured-content {
+
+		gap: 1.5rem;
+
+	}
+
+	.project-meta {
+
+		gap: .75rem;
+
+	}
+
+	.project-actions {
+
+		flex-direction: column;
+
+		align-items: stretch;
+
+	}
+
+	.project-actions .btn {
+
+		width: 100%;
+
+		justify-content: center;
+
+	}
+
+	.project-stats {
+
+		grid-template-columns: repeat(2, 1fr);
+
+		gap: 1rem;
+
+	}
+
+}
+
+/* ==========================================================
+   Mobile
+========================================================== */
+
+@media (max-width: 768px) {
+
+	.featured-project {
+
+		padding: 1.75rem;
+
+	}
+
+	.featured-content h2 {
+
+		font-size: clamp(2rem, 8vw, 2.6rem);
+
+	}
+
+	.project-category {
+
+		font-size: .72rem;
+
+		padding: .4rem .8rem;
+
+	}
+
+	.project-tags {
+
+		gap: .5rem;
+
+	}
+
+	.project-tags span {
+
+		font-size: .75rem;
+
+		padding: .4rem .75rem;
+
+	}
+
+	.project-meta {
+
+		flex-direction: column;
+
+		align-items: flex-start;
+
+	}
+
+	.project-meta span {
+
+		width: 100%;
+
+	}
+
+	.project-stats {
+
+		grid-template-columns: 1fr;
+
+	}
+
+	.project-stat {
+
+		padding: 1.75rem;
+
+	}
+
+	.open-source-actions {
+
+		flex-direction: column;
+
+	}
+
+	.open-source-actions .btn {
+
+		width: 100%;
+
+		justify-content: center;
+
+	}
+
+}
+
+/* ==========================================================
+   Small Phones
+========================================================== */
+
+@media (max-width: 576px) {
+
+	.featured-project {
+
+		padding: 1.5rem;
+
+		border-radius: 10px;
+
+	}
+
+	.featured-content {
+
+		gap: 1.25rem;
+
+	}
+
+	.featured-content p {
+
+		font-size: .95rem;
+
+	}
+
+	.project-category {
+
+		font-size: .7rem;
+
+	}
+
+	.project-tags span {
+
+		font-size: .72rem;
+
+	}
+
+	.project-stat h3 {
+
+		font-size: 2.2rem;
+
+	}
+
+	.project-stat span {
+
+		font-size: .82rem;
+
+	}
+
+}
+
+/* ==========================================================
+   Ajustes da Secção "What's Next"
+========================================================== */
+
+/* Ajusta o espaçamento interno do card para remover o excesso de altura */
+.whats-next-card {
+	padding: 1.75rem 2rem;
+	min-height: auto;
+	height: fit-content;
+}
+
+.whats-next-card .project-content {
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+}
+
+.whats-next-card h3 {
+	margin-bottom: 0;
+	font-size: 1.25rem;
+}
+
+.whats-next-card p {
+	margin: 0;
+	font-size: 0.95rem;
+	line-height: 1.6;
+}
+
+/* Em ecrãs de computador, mostra os 2 cards restantes lado a lado */
+@media (min-width: 769px) {
+	.whats-next-section .projects-grid {
+		grid-template-columns: repeat(2, 1fr);
+		gap: 1.5rem;
+	}
+}
+
+/* ============================================================
+   ANIMAÇÕES JS & EFEITOS INTERATIVOS (PROJECTS)
+   ============================================================ */
+
+/* Barra de progresso no topo */
+.scroll-progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #ffffff, #666666);
+    width: 0%;
+    z-index: 9999;
+    transition: width 0.1s ease-out;
+}
+
+/* Base das Animações de Scroll (Substitui o projectFade antigo por transições JS mais suaves) */
+.js-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+}
+
+.js-reveal.is-revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Suporte para Efeito 3D Tilt nos Cards */
+.project-card,
+.featured-project,
+.project-stat {
+    will-change: transform;
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), 
+                border-color 0.25s ease, 
+                background-color 0.25s ease, 
+                box-shadow 0.25s ease;
+    transform-style: preserve-3d;
+}
+
+/* Efeito Spotlight radial com cursor */
+.project-card::after,
+.featured-project::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        600px circle at var(--mouse-x, -9999px) var(--mouse-y, -9999px),
+        rgba(255, 255, 255, 0.05),
+        transparent 40%
+    );
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 2;
+    transition: opacity 0.3s ease;
+}

@@ -1,294 +1,221 @@
 /*
 ==========================================================
 Rodrigo Tripa Portfolio
-main.js
+main.js - Optimized & Refactored
 ==========================================================
 */
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    /*
-    ==========================================================
-    Elements
-    ==========================================================
-    */
-
+    /* ==========================================================
+       1. Seleção de Elementos Principais
+       ========================================================== */
     const header = document.querySelector(".header");
-
     const menuToggle = document.querySelector(".menu-toggle");
-
     const navbar = document.querySelector(".navbar");
-
     const navLinks = document.querySelectorAll('.nav-links a');
-
     const backToTop = document.getElementById("back-to-top");
-
     const revealElements = document.querySelectorAll(
         ".hero, .section-header, .project-card, .about-content, .contact-card, .footer"
     );
 
-    /*
-    ==========================================================
-    Header Scroll Effect
-    ==========================================================
-    */
+    /* ==========================================================
+       2. Handlers de Scroll Otimizados (requestAnimationFrame)
+       ========================================================== */
+    let isScrolling = false;
 
-    function updateHeader() {
+    function handleScrollEvents() {
+        const scrollY = window.scrollY;
 
-        if (window.scrollY > 50) {
-
-            header.style.background = "rgba(5,5,5,.95)";
-            header.style.borderBottomColor = "#2b2b2b";
-
-        } else {
-
-            header.style.background = "rgba(5,5,5,.80)";
-            header.style.borderBottomColor = "#1f1f1f";
-
+        // Otimização Header Scroll Effect
+        if (header) {
+            if (scrollY > 50) {
+                header.style.background = "rgba(5, 5, 5, 0.95)";
+                header.style.borderBottomColor = "#2b2b2b";
+            } else {
+                header.style.background = "rgba(5, 5, 5, 0.80)";
+                header.style.borderBottomColor = "#1f1f1f";
+            }
         }
 
-    }
-
-    window.addEventListener("scroll", updateHeader);
-
-    updateHeader();
-
-    /*
-    ==========================================================
-    Back To Top
-    ==========================================================
-    */
-
-    function updateBackToTop() {
-
-        if (window.scrollY > 500) {
-
-            backToTop.classList.add("show");
-
-        } else {
-
-            backToTop.classList.remove("show");
-
+        // Otimização Back To Top
+        if (backToTop) {
+            if (scrollY > 500) {
+                backToTop.classList.add("show");
+            } else {
+                backToTop.classList.remove("show");
+            }
         }
 
+        // Active Navigation Link no Scroll (para One-Page)
+        updateActiveSection(scrollY);
+
+        isScrolling = false;
     }
 
-    window.addEventListener("scroll", updateBackToTop);
+    window.addEventListener("scroll", () => {
+        if (!isScrolling) {
+            window.requestAnimationFrame(handleScrollEvents);
+            isScrolling = true;
+        }
+    }, { passive: true });
 
-    updateBackToTop();
+    // Chamada inicial para definir estados de scroll ao carregar
+    handleScrollEvents();
 
+    /* ==========================================================
+       3. Back To Top Action
+       ========================================================== */
     backToTop?.addEventListener("click", () => {
-
         window.scrollTo({
-
             top: 0,
-
             behavior: "smooth"
-
         });
-
     });
 
-    /*
-    ==========================================================
-    Smooth Scroll
-    ==========================================================
-    */
+    /* ==========================================================
+       4. Active Navigation & Smooth Scroll
+       ========================================================== */
+    const sections = document.querySelectorAll("section[id]");
+
+    function updateActiveSection(scrollY) {
+        if (sections.length === 0) return;
+
+        let currentId = "";
+
+        sections.forEach(section => {
+            const top = section.offsetTop - 160;
+            const height = section.offsetHeight;
+
+            if (scrollY >= top && scrollY < top + height) {
+                currentId = section.getAttribute("id");
+            }
+        });
+
+        navLinks.forEach(link => {
+            const href = link.getAttribute("href");
+            if (href && href.startsWith("#")) {
+                if (href === "#" + currentId) {
+                    link.classList.add("active");
+                } else {
+                    link.classList.remove("active");
+                }
+            }
+        });
+    }
 
     navLinks.forEach(link => {
-
         link.addEventListener("click", e => {
-
             const href = link.getAttribute("href");
 
-            if (!href.startsWith("#")) return;
+            if (!href || !href.startsWith("#")) return;
 
             e.preventDefault();
-
             const target = document.querySelector(href);
 
             if (!target) return;
 
             target.scrollIntoView({
-
                 behavior: "smooth",
                 block: "start"
-
             });
 
-            navbar?.classList.remove("active");
-
+            closeMobileMenu();
         });
-
     });
 
-    /*
-    ==========================================================
-    Mobile Menu
-    ==========================================================
-    */
-
-    menuToggle?.addEventListener("click", () => {
-
-        navbar.classList.toggle("active");
-
-        menuToggle.classList.toggle("active");
-
-    });
-
-    /*
-    ==========================================================
-    Active Navigation
-    ==========================================================
-    */
-
-    const sections = document.querySelectorAll("section");
-
-    function updateActiveSection() {
-
-        let current = "";
-
-        sections.forEach(section => {
-
-            const top = section.offsetTop - 150;
-
-            const height = section.offsetHeight;
-
-            if (window.scrollY >= top) {
-
-                current = section.id;
-
-            }
-
-        });
-
-        navLinks.forEach(link => {
-
-            link.classList.remove("active");
-
-            if (link.getAttribute("href") === "#" + current) {
-
-                link.classList.add("active");
-
-            }
-
-        });
-
+    /* ==========================================================
+       5. Mobile Menu Controller
+       ========================================================== */
+    function closeMobileMenu() {
+        navbar?.classList.remove("active");
+        menuToggle?.classList.remove("active");
+        document.body.style.overflow = ""; // Reativa o scroll do body
     }
 
-    window.addEventListener("scroll", updateActiveSection);
+    function toggleMobileMenu() {
+        const isActive = navbar?.classList.toggle("active");
+        menuToggle?.classList.toggle("active");
+        
+        // Bloqueia o scroll do fundo se o menu estiver aberto
+        document.body.style.overflow = isActive ? "hidden" : "";
+    }
 
-    updateActiveSection();
+    menuToggle?.addEventListener("click", toggleMobileMenu);
 
-    /*
-    ==========================================================
-    Reveal Animation
-    ==========================================================
-    */
-
-    const observer = new IntersectionObserver((entries) => {
-
-        entries.forEach(entry => {
-
-            if (entry.isIntersecting) {
-
-                entry.target.classList.add("show");
-
-                observer.unobserve(entry.target);
-
-            }
-
-        });
-
-    }, {
-
-        threshold: 0.15
-
-    });
-
-    revealElements.forEach(element => {
-
-        element.classList.add("reveal");
-
-        observer.observe(element);
-
-    });
-
-    /*
-    ==========================================================
-    Keyboard Accessibility
-    ==========================================================
-    */
-
-    document.addEventListener("keydown", event => {
-
-        if (event.key === "Escape") {
-
-            navbar?.classList.remove("active");
-
-            menuToggle?.classList.remove("active");
-
-        }
-
-    });
-
-    /*
-    ==========================================================
-    Prevent Empty Links
-    ==========================================================
-    */
-
-    document.querySelectorAll("a").forEach(link => {
-
-        if (link.getAttribute("href") === "#") {
-
-            link.addEventListener("click", e => {
-
-                e.preventDefault();
-
+    /* ==========================================================
+       6. IntersectionObserver (Reveal Animation)
+       ========================================================== */
+    if (revealElements.length > 0) {
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("show");
+                    observer.unobserve(entry.target);
+                }
             });
-
-        }
-
-    });
-
-    /*
-    ==========================================================
-    Image Fade In
-    ==========================================================
-    */
-
-    document.querySelectorAll("img").forEach(img => {
-
-        if (img.complete) {
-
-            img.classList.add("loaded");
-
-            return;
-
-        }
-
-        img.addEventListener("load", () => {
-
-            img.classList.add("loaded");
-
+        }, {
+            threshold: 0.12,
+            rootMargin: "0px 0px -30px 0px"
         });
 
+        revealElements.forEach(element => {
+            element.classList.add("reveal");
+            revealObserver.observe(element);
+        });
+    }
+
+    /* ==========================================================
+       7. Otimização de Imagens (Fade-in ao carregar)
+       ========================================================== */
+    document.querySelectorAll("img").forEach(img => {
+        if (img.complete) {
+            img.classList.add("loaded");
+        } else {
+            img.addEventListener("load", () => {
+                img.classList.add("loaded");
+            }, { once: true });
+        }
     });
 
-    /*
-    ==========================================================
-    Console Signature
-    ==========================================================
-    */
+    /* ==========================================================
+       8. Mouse Glow (Com RAF para Otimização de CPU)
+       ========================================================== */
+    let ticking = false;
 
-    console.log(
-        "%cRodrigoTripa.dev",
-        "color:#ffffff;font-size:18px;font-weight:bold;"
-    );
+    window.addEventListener("mousemove", (event) => {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                document.documentElement.style.setProperty("--mouse-x", `${event.clientX}px`);
+                document.documentElement.style.setProperty("--mouse-y", `${event.clientY}px`);
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }, { passive: true });
 
+    /* ==========================================================
+       9. Acessibilidade (Teclado & Prevenção de Links Vazios)
+       ========================================================== */
+    document.addEventListener("keydown", event => {
+        if (event.key === "Escape") {
+            closeMobileMenu();
+        }
+    });
+
+    document.querySelectorAll('a[href="#"]').forEach(link => {
+        link.addEventListener("click", e => {
+            e.preventDefault();
+        });
+    });
+
+    /* ==========================================================
+       10. Console Signature
+       ========================================================== */
     console.log(
-        "Designed & developed by Rodrigo Tripa."
+        "%c Rodrigo Tripa %c Cybersecurity & Security Research ",
+        "background: #111; color: #38d26b; font-weight: bold; padding: 4px 8px; border-radius: 4px 0 0 4px; border: 1px solid #38d26b;",
+        "background: #38d26b; color: #000; font-weight: bold; padding: 4px 8px; border-radius: 0 4px 4px 0;"
     );
 
 });

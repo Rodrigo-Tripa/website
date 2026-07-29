@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Security Weekly Report | Rodrigo Tripa
+    </title>
+
+    <meta
+        name="title"
+        content="Security Weekly Report | Rodrigo Tripa">
+
+    <meta
+        name="description"
+        content="Security Weekly report reader for weekly cybersecurity intelligence, technical analysis, vulnerabilities, malware and research.">
+
+    <meta
+        name="author"
+        content="Rodrigo Tripa">
+
+    <meta
+        name="robots"
+        content="index, follow">
+
+    <meta
+        name="theme-color"
+        content="#050505">
+
+    <meta
+        name="color-scheme"
+        content="dark">
+
+    <link
+        rel="canonical"
+        href="https://rodrigotripa.dev/report.html">
+
+    <meta
+        property="og:type"
+        content="article">
+
+    <meta
+        property="og:site_name"
+        content="Rodrigo Tripa">
+
+    <meta
+        property="og:title"
+        content="Security Weekly Report">
+
+    <meta
+        property="og:description"
+        content="Weekly cybersecurity intelligence, threat analysis and technical research.">
+
+    <meta
+        property="og:image"
+        content="https://rodrigotripa.dev/assets/images/og-cover.png">
+
+    <meta
+        property="og:url"
+        content="https://rodrigotripa.dev/report.html">
+
+    <meta
+        name="twitter:card"
+        content="summary_large_image">
+
+    <meta
+        name="twitter:title"
+        content="Security Weekly Report">
+
+    <meta
+        name="twitter:description"
+        content="Weekly cybersecurity intelligence, threat analysis and technical research.">
+
+    <meta
+        name="twitter:image"
+        content="https://rodrigotripa.dev/assets/images/og-cover.png">
+
+    <link
+        rel="icon"
+        type="image/png"
+        href="/assets/icons/favicon.png">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+        rel="stylesheet">
+
+    <link
+        rel="stylesheet"
+        href="/assets/css/style.css">
+
+    <style>
+        .report-page {
+            min-height: 100vh;
+        }
+
+        .report-hero {
+            position: relative;
+            padding: 9rem 0 4rem;
+            overflow: hidden;
+        }
+
+        .report-hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at top center, rgba(255, 255, 255, .06), transparent 38%);
+            pointer-events: none;
+        }
+
+        .report-hero .container,
+        .report-body .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .report-hero-content {
+            max-width: 900px;
+        }
+
+        .report-kicker {
+            display: inline-flex;
+            padding: .45rem .8rem;
+            border: 1px solid rgba(255, 255, 255, .12);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, .02);
+            color: var(--text-secondary);
+            font-size: .82rem;
+            margin-bottom: 1.25rem;
+            letter-spacing: .04em;
+            text-transform: uppercase;
+        }
+
+        .report-title {
+            margin-bottom: 1rem;
+            max-width: 14ch;
+        }
+
+        .report-description {
+            max-width: 760px;
+            color: var(--text-muted);
+            line-height: 1.85;
+            margin-bottom: 1.75rem;
+            font-size: 1.05rem;
+        }
+
+        .report-meta-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .75rem;
+            margin-bottom: 2rem;
+        }
+
+        .report-meta-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            padding: .55rem .85rem;
+            border: 1px solid rgba(255, 255, 255, .10);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, .02);
+            color: var(--text-secondary);
+            font-size: .82rem;
+        }
+
+        .report-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .75rem;
+        }
+
+        .report-body {
+            padding: 0 0 6rem;
+        }
+
+        .report-layout {
+            display: grid;
+            grid-template-columns: 260px minmax(0, 1fr);
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .report-sidebar {
+            position: sticky;
+            top: 6rem;
+            display: grid;
+            gap: 1rem;
+        }
+
+        .report-panel {
+            padding: 1.1rem;
+            border: 1px solid rgba(255, 255, 255, .10);
+            border-radius: 1.25rem;
+            background: rgba(255, 255, 255, .02);
+            backdrop-filter: blur(10px);
+        }
+
+        .report-panel h3 {
+            font-size: .82rem;
+            text-transform: uppercase;
+            letter-spacing: .10em;
+            color: var(--text-secondary);
+            margin-bottom: .9rem;
+        }
+
+        .report-toc {
+            display: grid;
+            gap: .45rem;
+            max-height: 60vh;
+            overflow: auto;
+            padding-right: .25rem;
+        }
+
+        .report-toc a {
+            display: block;
+            color: var(--text-muted);
+            font-size: .92rem;
+            line-height: 1.5;
+        }
+
+        .report-toc a:hover {
+            color: var(--text-primary);
+        }
+
+        .report-toc a.is-active {
+            color: var(--text-primary);
+        }
+
+        .toc-indent-3 {
+            padding-left: .9rem;
+        }
+
+        .report-content {
+            min-width: 0;
+        }
+
+        .report-card {
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, .10);
+            border-radius: 1.5rem;
+            background: rgba(255, 255, 255, .02);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, .28);
+        }
+
+        .report-content h1,
+        .report-content h2,
+        .report-content h3,
+        .report-content h4 {
+            scroll-margin-top: 6rem;
+        }
+
+        .report-content h1 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-size: 2.1rem;
+        }
+
+        .report-content h2 {
+            margin-top: 2rem;
+            margin-bottom: .9rem;
+            font-size: 1.65rem;
+        }
+
+        .report-content h3 {
+            margin-top: 1.6rem;
+            margin-bottom: .7rem;
+            font-size: 1.12rem;
+        }
+
+        .report-content p,
+        .report-content li {
+            color: var(--text-muted);
+            line-height: 1.9;
+        }
+
+        .report-content p {
+            margin-bottom: 1rem;
+        }
+
+        .report-content ul,
+        .report-content ol {
+            padding-left: 1.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .report-content blockquote {
+            margin: 1.25rem 0;
+            padding: 1rem 1.15rem;
+            border-left: 3px solid rgba(255, 255, 255, .22);
+            background: rgba(255, 255, 255, .03);
+            border-radius: .85rem;
+            color: var(--text-secondary);
+        }
+
+        .report-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            overflow: hidden;
+            border-radius: 1rem;
+        }
+
+        .report-content th,
+        .report-content td {
+            padding: .85rem 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, .10);
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .report-content th {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, .03);
+        }
+
+        .report-content code {
+            padding: .18rem .4rem;
+            border-radius: .45rem;
+            background: rgba(255, 255, 255, .06);
+            color: var(--text-primary);
+        }
+
+        .report-content pre {
+            overflow: auto;
+            padding: 1rem 1.1rem;
+            border-radius: 1rem;
+            background: rgba(0, 0, 0, .38);
+            border: 1px solid rgba(255, 255, 255, .10);
+            margin: 1.25rem 0;
+        }
+
+        .report-content pre code {
+            padding: 0;
+            background: transparent;
+            color: inherit;
+        }
+
+        .report-content img {
+            display: block;
+            max-width: 100%;
+            border-radius: 1rem;
+            margin: 1.5rem 0;
+            border: 1px solid rgba(255, 255, 255, .10);
+        }
+
+        .report-loading,
+        .report-error {
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, .10);
+            border-radius: 1.25rem;
+            background: rgba(255, 255, 255, .02);
+            color: var(--text-muted);
+        }
+
+        .report-footer-gap {
+            height: 3rem;
+        }
+
+        @media (max-width: 992px) {
+            .report-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .report-sidebar {
+                position: static;
+            }
+
+            .report-card {
+                padding: 1.35rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .report-hero {
+                padding-top: 8.25rem;
+            }
+
+            .report-title {
+                max-width: 100%;
+            }
+
+            .report-content h1 {
+                font-size: 1.8rem;
+            }
+
+            .report-content h2 {
+                font-size: 1.45rem;
+            }
+        }
+    </style>
+
+    <script
+        src="/assets/js/vendor/marked.min.js"
+        defer></script>
+
+</head>
+
+<body class="report-page">
+
+    <header class="header">
+
+        <div class="container">
+
+            <a
+                href="/"
+                class="logo">
+                Rodrigo Tripa
+            </a>
+
+            <nav class="navbar">
+
+                <ul class="nav-links">
+
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/projects.html">Projects</a></li>
+                    <li><a href="/knowledge.html">Knowledge</a></li>
+                    <li><a href="/security.html">Security</a></li>
+
+                </ul>
+
+            </nav>
+
+            <div class="social-links">
+
+                <a
+                    href="https://github.com/Rodrigo-Tripa"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                    GitHub
+                </a>
+
+                <a
+                    href="https://www.linkedin.com/in/rodrigo-tripa"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                    LinkedIn
+                </a>
+
+            </div>
+
+        </div>
+
+    </header>
+
+    <main>
+
+        <section class="report-hero">
+
+            <div class="container">
+
+                <div class="report-hero-content">
+
+                    <span class="report-kicker" id="report-kicker">
+                        Security Weekly
+                    </span>
+
+                    <h1
+                        class="report-title"
+                        id="report-title">
+                        Loading report...
+                    </h1>
+
+                    <p
+                        class="report-description"
+                        id="report-description">
+                        Fetching metadata and Markdown content.
+                    </p>
+
+                    <div class="report-meta-row" id="report-meta-row">
+                        <span class="report-meta-pill">Loading metadata...</span>
+                    </div>
+
+                    <div class="report-actions">
+                        <a
+                            href="/security.html"
+                            class="btn btn-secondary">
+                            Back to Security Weekly
+                        </a>
+
+                        <a
+                            id="raw-link"
+                            href="#"
+                            class="btn btn-secondary">
+                            View Raw Markdown
+                        </a>
+
+                        <a
+                            id="download-link"
+                            href="#"
+                            class="btn btn-primary"
+                            download>
+                            Download Markdown
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="report-body">
+
+            <div class="container">
+
+                <div class="report-layout">
+
+                    <aside class="report-sidebar">
+
+                        <div class="report-panel">
+
+                            <h3>
+                                Contents
+                            </h3>
+
+                            <nav
+                                class="report-toc"
+                                id="report-toc">
+
+                                <span style="color: var(--text-muted);">
+                                    Waiting for content...
+                                </span>
+
+                            </nav>
+
+                        </div>
+
+                        <div class="report-panel">
+
+                            <h3>
+                                Details
+                            </h3>
+
+                            <div
+                                id="report-details"
+                                style="display:grid; gap:.65rem; color:var(--text-muted); font-size:.92rem;">
+
+                                <span>Loading details...</span>
+
+                            </div>
+
+                        </div>
+
+                    </aside>
+
+                    <article class="report-content">
+
+                        <div class="report-card" id="report-card">
+
+                            <div class="report-loading">
+                                Loading report content...
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <div class="report-footer-gap"></div>
+
+    </main>
+
+    <footer class="footer">
+
+        <div class="container footer-container">
+
+            <div class="footer-brand">
+
+                <h2>
+                    Rodrigo Tripa
+                </h2>
+
+                <p>
+                    Personal portfolio focused on projects, learning and cybersecurity.
+                </p>
+
+            </div>
+
+            <div class="footer-links">
+
+                <div class="footer-column">
+
+                    <h3>
+                        Navigation
+                    </h3>
+
+                    <ul>
+
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/projects.html">Projects</a></li>
+                        <li><a href="/knowledge.html">Knowledge</a></li>
+                        <li><a href="/security.html">Security Weekly</a></li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+
+            <div class="container">
+
+                <p>
+                    © 2026 Rodrigo Tripa. All rights reserved.
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+    <script>
+        (function () {
+            const params = new URLSearchParams(window.location.search);
+            const edition = params.get("edition") || "2026/week-31";
+
+            const basePath = `security/${edition}`;
+            const markdownUrl = `${basePath}/index.md`;
+            const metadataUrl = `${basePath}/metadata.json`;
+
+            const titleEl = document.getElementById("report-title");
+            const kickerEl = document.getElementById("report-kicker");
+            const descEl = document.getElementById("report-description");
+            const metaRowEl = document.getElementById("report-meta-row");
+            const detailsEl = document.getElementById("report-details");
+            const tocEl = document.getElementById("report-toc");
+            const cardEl = document.getElementById("report-card");
+            const rawLinkEl = document.getElementById("raw-link");
+            const downloadLinkEl = document.getElementById("download-link");
+
+            const state = {
+                markdown: "",
+                metadata: null
+            };
+
+            function escapeHTML(value) {
+                return String(value)
+                    .replaceAll("&", "&amp;")
+                    .replaceAll("<", "&lt;")
+                    .replaceAll(">", "&gt;")
+                    .replaceAll('"', "&quot;")
+                    .replaceAll("'", "&#39;");
+            }
+
+            function formatDate(value) {
+                if (!value) return "—";
+                const date = new Date(value);
+                if (Number.isNaN(date.getTime())) return value;
+                return new Intl.DateTimeFormat("en-GB", {
+                    year: "numeric",
+                    month: "short",
+                    day: "2-digit"
+                }).format(date);
+            }
+
+            function formatThreatLevel(value) {
+                const level = String(value || "Moderate").toLowerCase();
+                if (level.includes("critical")) return "🔴 Critical";
+                if (level.includes("high")) return "🟠 High";
+                if (level.includes("low")) return "🟢 Low";
+                return "🟡 Moderate";
+            }
+
+            function removeFrontMatter(markdown) {
+                return String(markdown || "").replace(
+                    /^---\r?\n[\s\S]*?\r?\n---\r?\n?/,
+                    ""
+                );
+            }
+
+            function buildAbsoluteAssetPath(relativePath) {
+                if (!relativePath) return relativePath;
+                if (/^(https?:|mailto:|data:|#|\/)/i.test(relativePath)) return relativePath;
+                return `${basePath}/${relativePath}`.replace(/\/{2,}/g, "/");
+            }
+
+            function preprocessMarkdown(markdown) {
+                return markdown
+                    .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (match, alt, src) => {
+                        const resolved = buildAbsoluteAssetPath(src.trim());
+                        return `![${alt}](${resolved})`;
+                    })
+                    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, text, href) => {
+                        const trimmed = href.trim();
+                        if (/^(https?:|mailto:|data:|#|\/)/i.test(trimmed)) {
+                            return match;
+                        }
+                        const resolved = buildAbsoluteAssetPath(trimmed);
+                        return `[${text}](${resolved})`;
+                    });
+            }
+
+            function slugify(text) {
+                return String(text)
+                    .toLowerCase()
+                    .trim()
+                    .replace(/[^a-z0-9]+/g, "-")
+                    .replace(/^-+|-+$/g, "");
+            }
+
+            function buildToc(html) {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, "text/html");
+                const headings = [...doc.querySelectorAll("h2, h3")];
+
+                if (!headings.length) {
+                    tocEl.innerHTML = '<span style="color: var(--text-muted);">No headings found.</span>';
+                    return doc.body.innerHTML;
+                }
+
+                const usedIds = new Map();
+
+                headings.forEach((heading) => {
+                    const text = heading.textContent.trim();
+                    let id = slugify(text) || "section";
+
+                    if (usedIds.has(id)) {
+                        const next = usedIds.get(id) + 1;
+                        usedIds.set(id, next);
+                        id = `${id}-${next}`;
+                    } else {
+                        usedIds.set(id, 1);
+                    }
+
+                    heading.id = id;
+                });
+
+                const tocItems = headings.map((heading) => {
+                    const level = Number(heading.tagName.replace("H", ""));
+                    const indentClass = level === 3 ? "toc-indent-3" : "";
+                    const label = escapeHTML(heading.textContent.trim());
+                    return `<a class="${indentClass}" href="#${heading.id}">${label}</a>`;
+                }).join("");
+
+                tocEl.innerHTML = tocItems;
+
+                return doc.body.innerHTML;
+            }
+
+            function setLoadingState(message) {
+                cardEl.innerHTML = `<div class="report-loading">${escapeHTML(message)}</div>`;
+                tocEl.innerHTML = `<span style="color: var(--text-muted);">${escapeHTML(message)}</span>`;
+                detailsEl.innerHTML = `<span>${escapeHTML(message)}</span>`;
+            }
+
+            async function loadReport() {
+                try {
+                    setLoadingState("Loading report content...");
+
+                    const [metadataResponse, markdownResponse] = await Promise.all([
+                        fetch(metadataUrl),
+                        fetch(markdownUrl)
+                    ]);
+
+                    if (!metadataResponse.ok) {
+                        throw new Error(`Failed to load metadata.json (${metadataResponse.status})`);
+                    }
+
+                    if (!markdownResponse.ok) {
+                        throw new Error(`Failed to load index.md (${markdownResponse.status})`);
+                    }
+
+                    const metadata = await metadataResponse.json();
+                    const markdown = await markdownResponse.text();
+
+                    state.metadata = metadata;
+                    state.markdown = markdown;
+
+                    renderReport();
+                } catch (error) {
+                    console.error(error);
+                    titleEl.textContent = "Report unavailable";
+                    descEl.textContent = "The selected report could not be loaded.";
+                    cardEl.innerHTML = `<div class="report-error">${escapeHTML(error.message)}</div>`;
+                    tocEl.innerHTML = '<span style="color: var(--text-muted);">Unable to build contents.</span>';
+                    detailsEl.innerHTML = `<span>${escapeHTML(error.message)}</span>`;
+                }
+            }
+
+            function renderReport() {
+                const metadata = state.metadata || {};
+                const cleanMarkdown = removeFrontMatter(state.markdown || "");
+                const markdown = preprocessMarkdown(cleanMarkdown);
+                const rendered = marked.parse(markdown, { breaks: true });
+                const html = buildToc(rendered);
+
+                const title = metadata.title || "Security Weekly";
+                const editionLabel = metadata.edition ? `#${String(metadata.edition).padStart(3, "0")}` : "—";
+                const weekLabel = metadata.week ? `Week ${String(metadata.week).padStart(2, "0")}` : "—";
+                const yearLabel = metadata.year || "—";
+                const publishedLabel = formatDate(metadata.published);
+                const updatedLabel = formatDate(metadata.last_updated || metadata.published);
+                const readingTimeLabel = metadata.readingTime ? `${metadata.readingTime} min` : "—";
+                const threatLevelLabel = formatThreatLevel(metadata.threatLevel);
+
+                document.title = `${title} | Security Weekly | Rodrigo Tripa`;
+                titleEl.textContent = title;
+                kickerEl.textContent = `Security Weekly ${editionLabel}`;
+                descEl.textContent = metadata.summary || "Weekly cybersecurity intelligence, threat analysis and technical research.";
+
+                metaRowEl.innerHTML = `
+                    <span class="report-meta-pill">${escapeHTML(weekLabel)} • ${escapeHTML(String(yearLabel))}</span>
+                    <span class="report-meta-pill">Published ${escapeHTML(publishedLabel)}</span>
+                    <span class="report-meta-pill">${escapeHTML(readingTimeLabel)}</span>
+                    <span class="report-meta-pill">${escapeHTML(threatLevelLabel)}</span>
+                `;
+
+                detailsEl.innerHTML = `
+                    <span><strong>Edition:</strong> ${escapeHTML(editionLabel)}</span>
+                    <span><strong>Week:</strong> ${escapeHTML(weekLabel)}</span>
+                    <span><strong>Year:</strong> ${escapeHTML(String(yearLabel))}</span>
+                    <span><strong>Published:</strong> ${escapeHTML(publishedLabel)}</span>
+                    <span><strong>Updated:</strong> ${escapeHTML(updatedLabel)}</span>
+                    <span><strong>Reading time:</strong> ${escapeHTML(readingTimeLabel)}</span>
+                    <span><strong>Threat level:</strong> ${escapeHTML(threatLevelLabel)}</span>
+                `;
+
+                rawLinkEl.href = markdownUrl;
+                downloadLinkEl.href = markdownUrl;
+                downloadLinkEl.setAttribute("download", `${edition.replace("/", "-")}.md`);
+
+                cardEl.innerHTML = html;
+
+                cardEl.querySelectorAll("img").forEach((img) => {
+                    if (!img.getAttribute("alt")) {
+                        img.setAttribute("alt", "Security Weekly illustration");
+                    }
+                });
+
+                tocEl.querySelectorAll("a").forEach((link) => {
+                    link.addEventListener("click", (event) => {
+                        event.preventDefault();
+                        const target = document.querySelector(link.getAttribute("href"));
+                        if (target) {
+                            target.scrollIntoView({ behavior: "smooth", block: "start" });
+                        }
+                    });
+                });
+            }
+
+            loadReport();
+        })();
+    </script>
+
+</body>
+
+</html>

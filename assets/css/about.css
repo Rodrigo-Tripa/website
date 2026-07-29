@@ -1,0 +1,295 @@
+/* ============================================================
+   ABOUT PAGE STYLES (about.css)
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   1. Estilo Geral das Secções e Layouts Flex
+   ------------------------------------------------------------ */
+.about-hero-grid,
+.about-split {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3rem;
+    margin-bottom: 4rem;
+}
+
+.about-hero-content,
+.about-split-content {
+    flex: 1;
+}
+
+.about-hero-media,
+.about-split-media {
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ------------------------------------------------------------
+   2. Foto de Perfil & Logo do Linux (Tamanhos Ajustados)
+   ------------------------------------------------------------ */
+
+/* Foto de Perfil (Aumentada para destaque) */
+.about-photo-card--portrait {
+    max-width: 320px;
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.about-photo-card--portrait img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+/* Logo do Linux (Aumentado e sem quadrado branco) */
+.about-side-figure img[src*="Linux-logo-pinguin.png"] {
+    max-width: 220px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    /* Remove o fundo branco integrando-o ao fundo escuro */
+    mix-blend-mode: screen; 
+    filter: contrast(1.1) brightness(0.9);
+}
+
+/* Imagem da Certificação eJPT */
+.about-cert-image {
+    max-width: 200px;
+    height: auto;
+    display: block;
+}
+
+/* ------------------------------------------------------------
+   3. Efeito Banner / Fade na Foto da Escola
+   ------------------------------------------------------------ */
+
+/* Transforma a secção da Escola num container relativo para o banner */
+.about-split:has(img[src*="Escola-Secundária.jpg"]) {
+    position: relative;
+    overflow: hidden;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    min-height: 380px;
+}
+
+/* Força o texto a ficar por cima da imagem e a ocupar até 55% da largura */
+.about-split:has(img[src*="Escola-Secundária.jpg"]) .about-split-content {
+    position: relative;
+    z-index: 2;
+    max-width: 55%;
+}
+
+/* O container da foto da escola expande para cobrir a área da direita */
+.about-split:has(img[src*="Escola-Secundária.jpg"]) .about-split-media {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 65%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.about-split:has(img[src*="Escola-Secundária.jpg"]) .about-side-figure {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+/* Imagem da Escola com Fade (Máscara de Gradiente) */
+.about-side-figure img[src*="Escola-Secundária.jpg"] {
+    width: 100%;
+    height: 100%;
+    max-width: none !important;
+    object-fit: cover;
+    object-position: center;
+    opacity: 0.35; /* Opacidade reduzida para garantir boa leitura do texto */
+
+    /* Efeito Fade: Transparente à esquerda (0%) -> Opaco à direita (100%) */
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.4) 30%, black 85%);
+    mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.4) 30%, black 85%);
+}
+
+/* ------------------------------------------------------------
+   4. Grelhas de Conteúdo (Focus, Goals, Tech, Contacts)
+   ------------------------------------------------------------ */
+.about-focus-grid,
+.about-tech-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.about-goals-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.about-focus-card,
+.about-tech-card,
+.about-goal-card,
+.about-contact-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 1.5rem;
+    border-radius: 8px;
+    transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.about-focus-card:hover,
+.about-tech-card:hover,
+.about-goal-card:hover,
+.about-contact-card:hover {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.about-contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.about-contact-card {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+/* ------------------------------------------------------------
+   5. Timeline (Journey)
+   ------------------------------------------------------------ */
+.about-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+    border-left: 2px solid rgba(255, 255, 255, 0.1);
+    padding-left: 1.5rem;
+}
+
+.timeline-item {
+    position: relative;
+}
+
+.timeline-item::before {
+    content: "";
+    position: absolute;
+    left: calc(-1.5rem - 5px);
+    top: 6px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #ffffff;
+}
+
+.timeline-year {
+    font-size: 0.85rem;
+    font-weight: 700;
+    opacity: 0.6;
+    margin-bottom: 0.25rem;
+}
+
+/* ------------------------------------------------------------
+   6. Responsividade para Telemóveis / Ecrãs Pequenos
+   ------------------------------------------------------------ */
+@media (max-width: 768px) {
+    .about-hero-grid,
+    .about-split {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    /* Reseta o efeito de fundo da foto da escola em ecrãs móveis */
+    .about-split:has(img[src*="Escola-Secundária.jpg"]) {
+        min-height: auto;
+    }
+
+    .about-split:has(img[src*="Escola-Secundária.jpg"]) .about-split-content {
+        max-width: 100%;
+    }
+
+    .about-split:has(img[src*="Escola-Secundária.jpg"]) .about-split-media {
+        position: relative;
+        width: 100%;
+        height: 200px;
+    }
+
+    .about-side-figure img[src*="Escola-Secundária.jpg"] {
+        opacity: 0.6;
+        -webkit-mask-image: none;
+        mask-image: none;
+        border-radius: 8px;
+    }
+
+    .about-photo-card--portrait {
+        max-width: 100%;
+    }
+}
+
+/* ============================================================
+   ANIMAÇÕES JS E EFEITOS INTERATIVOS
+   ============================================================ */
+
+/* Barra de progresso no topo */
+.scroll-progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #ffffff, #888888);
+    width: 0%;
+    z-index: 9999;
+    transition: width 0.1s ease-out;
+}
+
+/* Cursor a piscar para o efeito de digitação */
+.typing-cursor::after {
+    content: "|";
+    display: inline-block;
+    margin-left: 2px;
+    animation: blink 0.8s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Animação Reveal on Scroll */
+.reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(25px);
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+                transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+}
+
+.reveal-on-scroll.is-revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Suporte para o Efeito 3D Tilt nos cards */
+.about-focus-card,
+.about-tech-card,
+.about-goal-card {
+    will-change: transform;
+    transition: transform 0.15s ease-out, border-color 0.2s ease, background-color 0.2s ease;
+    transform-style: preserve-3d;
+}
