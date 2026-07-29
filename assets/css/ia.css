@@ -1,0 +1,289 @@
+/* ==========================================================
+   Rodrigo Tripa Portfolio
+   ia.css - AI Assistant Module Styles
+========================================================== */
+
+.ai-section {
+    padding-block: clamp(3rem, 6vw, 5rem);
+}
+
+/* Prompt Chips */
+.prompt-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    margin-bottom: 1.75rem;
+}
+
+.chip {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--surface);
+    color: var(--text-secondary);
+    font-family: var(--font-family);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-medium);
+    cursor: pointer;
+    transition: transform var(--transition), border-color var(--transition), background-color var(--transition), color var(--transition);
+}
+
+.chip:hover {
+    color: var(--text);
+    background: var(--surface-light);
+    border-color: #3b3b3b;
+    transform: translateY(-2px);
+}
+
+/* Chat Container Card */
+.chat-wrapper {
+    display: flex;
+    flex-direction: column;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+}
+
+/* Chat Scroll Feed */
+.chat-history {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    height: 520px;
+    padding: 2rem;
+    overflow-y: auto;
+    background: var(--background);
+}
+
+/* Message Item */
+.message {
+    display: flex;
+    gap: 1rem;
+    max-width: 88%;
+}
+
+.message.user {
+    align-self: flex-end;
+    flex-direction: row-reverse;
+}
+
+.message.assistant {
+    align-self: flex-start;
+}
+
+.message-avatar {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    font-size: 0.75rem;
+    font-weight: var(--fw-bold);
+    letter-spacing: 0.05em;
+    flex-shrink: 0;
+    border: 1px solid var(--border);
+    background: var(--surface-light);
+    color: var(--text-secondary);
+}
+
+.message.user .message-avatar {
+    background: var(--text);
+    color: var(--background);
+    border-color: var(--text);
+}
+
+.message.assistant .message-avatar {
+    border-color: #333;
+    color: var(--text);
+}
+
+.message-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1rem 1.25rem;
+    color: var(--text);
+    font-size: 0.95rem;
+    line-height: 1.65;
+}
+
+.message.user .message-content {
+    background: #121212;
+    border-color: #2b2b2b;
+}
+
+.message.assistant .message-content {
+    background: #090909;
+    border-color: #1f1f1f;
+}
+
+/* Formatted Markdown Content */
+.message-content p {
+    color: var(--text);
+    margin-bottom: 0.75rem;
+}
+
+.message-content p:last-child {
+    margin-bottom: 0;
+}
+
+.message-content h1,
+.message-content h2,
+.message-content h3,
+.message-content h4 {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    color: var(--text);
+    font-weight: var(--fw-semibold);
+}
+
+.message-content h2 { font-size: 1.15rem; }
+.message-content h3 { font-size: 1.05rem; }
+
+.message-content ul,
+.message-content ol {
+    margin-top: 0.5rem;
+    margin-bottom: 0.75rem;
+    padding-left: 1.5rem;
+}
+
+.message-content ul { list-style: disc; }
+.message-content ol { list-style: decimal; }
+
+.message-content li {
+    color: var(--text-secondary);
+    margin-bottom: 0.35rem;
+}
+
+.message-content code {
+    font-family: "JetBrains Mono", monospace;
+    background: #181818;
+    color: #e5e5e5;
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    border: 1px solid #282828;
+}
+
+.message-content pre {
+    background: #050505;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem;
+    overflow-x: auto;
+    margin: 0.85rem 0;
+}
+
+.message-content pre code {
+    background: transparent;
+    padding: 0;
+    border: none;
+    font-size: 0.85rem;
+    color: #d1d5db;
+}
+
+/* Loading / Pulsing Indicator */
+.loading-dots {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.loading-dots span {
+    width: 6px;
+    height: 6px;
+    background-color: var(--text-secondary);
+    border-radius: 50%;
+    animation: pulse 1.4s infinite ease-in-out both;
+}
+
+.loading-dots span:nth-child(1) { animation-delay: -0.32s; }
+.loading-dots span:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes pulse {
+    0%, 80%, 100% { transform: scale(0); opacity: 0.3; }
+    40% { transform: scale(1); opacity: 1; }
+}
+
+/* Chat Form Input Bar */
+.chat-form {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+}
+
+.chat-input {
+    flex: 1;
+    background: var(--background);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.85rem 1.15rem;
+    color: var(--text);
+    font-family: var(--font-family);
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color var(--transition);
+}
+
+.chat-input:focus {
+    border-color: #444444;
+}
+
+.chat-input::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.7;
+}
+
+.chat-submit {
+    padding: 0.85rem 1.5rem;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+}
+
+.chat-submit:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+.btn-arrow {
+    transition: transform var(--transition);
+}
+
+.chat-submit:hover:not(:disabled) .btn-arrow {
+    transform: translateX(4px);
+}
+
+/* Responsive Overrides */
+@media (max-width: 768px) {
+    .chat-history {
+        height: 420px;
+        padding: 1.25rem;
+    }
+
+    .message {
+        max-width: 95%;
+    }
+
+    .chat-form {
+        padding: 0.85rem;
+        gap: 0.5rem;
+    }
+
+    .chat-submit span:not(.btn-arrow) {
+        display: none;
+    }
+
+    .chat-submit {
+        padding: 0.85rem 1.15rem;
+    }
+}
