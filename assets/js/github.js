@@ -36,7 +36,7 @@ async function fetchRepositoryTree() {
 async function fetchMarkdown(path) {
 
     const url =
-        `https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${BRANCH}/${path}`;
+        `https://api.rodrigotripa.dev/repos/${REPO_OWNER}/${REPO_NAME}/contents/${path}`;
 
     const response = await fetch(url);
 
