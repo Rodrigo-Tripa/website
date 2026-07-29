@@ -36,37 +36,26 @@
 
 <body>
 
-    <header class="header">
-        <div class="container">
-            <a href="/" class="logo">
-                Rodrigo Tripa
+    <header class="topbar">
+
+        <a href="/" class="logo">
+            Rodrigo Tripa
+        </a>
+
+        <nav>
+
+            <a href="/">Home</a>
+
+            <a href="https://github.com/Rodrigo-Tripa/Cyber-Notes"
+               target="_blank"
+               rel="noopener noreferrer">
+
+                Cyber Notes
+
             </a>
 
-            <nav class="navbar">
-                <ul class="nav-links">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/projects.html">Projects</a></li>
-                    <li><a href="/knowledge.html" class="active">Knowledge</a></li>
-                    <li><a href="/security.html">Security</a></li>
-                    <li><a href="/research.html">Research</a></li>
-                    <li><a href="/ia.html">AI Assistant</a></li>
-                    <li><a href="/about.html">About</a></li>
-                </ul>
-            </nav>
+        </nav>
 
-            <div class="social-links">
-                <a href="https://github.com/Rodrigo-Tripa" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-                    GitHub
-                </a>
-                <a href="https://www.linkedin.com/in/rodrigo-tripa" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                    LinkedIn
-                </a>
-            </div>
-
-            <button class="menu-toggle" aria-label="Toggle Navigation Menu">
-                ☰
-            </button>
-        </div>
     </header>
 
     <main id="knowledge-main" class="is-collapsed">

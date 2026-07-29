@@ -100,15 +100,71 @@
             </a>
 
             <nav class="navbar">
+
                 <ul class="nav-links">
-                    <li><a href="/" class="active">Home</a></li>
-                    <li><a href="/projects.html">Projects</a></li>
-                    <li><a href="/knowledge.html">Knowledge</a></li>
-                    <li><a href="/security.html">Security</a></li>
-                    <li><a href="/research.html">Research</a></li>
-                    <li><a href="/ia.html">AI Assistant</a></li>
-                    <li><a href="/about.html">About</a></li>
+
+                    <li>
+
+                        <a href="/">
+
+                            Home
+
+                        </a>
+
+                    </li>
+
+                    <li>
+
+                        <a href="/projects.html">
+
+                            Projects
+
+                        </a>
+
+                    </li>
+
+                    <li>
+
+                        <a href="/knowledge.html">
+
+                            Knowledge
+
+                        </a>
+
+                    </li>
+
+                    <li>
+
+                        <a href="/security.html">
+
+                            Security
+
+                        </a>
+
+                    </li>
+
+                    <li>
+
+                        <a href="/research.html">
+
+                            Research
+
+                        </a>
+
+                    </li>
+
+                    <li>
+
+                        <a href="/about.html">
+
+                            About
+
+                        </a>
+
+                    </li>
+
                 </ul>
+
             </nav>
 
             <div class="social-links">

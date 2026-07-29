@@ -26,37 +26,18 @@
 <body>
 
 <header class="header">
-        <div class="container">
-            <a href="/" class="logo">
-                Rodrigo Tripa
-            </a>
 
-            <nav class="navbar">
-                <ul class="nav-links">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/projects.html">Projects</a></li>
-                    <li><a href="/knowledge.html">Knowledge</a></li>
-                    <li><a href="/security.html">Security</a></li>
-                    <li><a href="/research.html" class="active">Research</a></li>
-                    <li><a href="/ia.html">AI Assistant</a></li>
-                    <li><a href="/about.html">About</a></li>
-                </ul>
-            </nav>
+    <div class="container">
 
-            <div class="social-links">
-                <a href="https://github.com/Rodrigo-Tripa" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-                    GitHub
-                </a>
-                <a href="https://www.linkedin.com/in/rodrigo-tripa" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                    LinkedIn
-                </a>
-            </div>
+        <a href="/" class="logo">
 
-            <button class="menu-toggle" aria-label="Toggle Navigation Menu">
-                ☰
-            </button>
-        </div>
-    </header>
+            Rodrigo Tripa
+
+        </a>
+
+    </div>
+
+</header>
 
 <main class="coming-page">
 
