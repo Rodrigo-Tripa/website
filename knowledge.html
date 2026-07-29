@@ -30,6 +30,8 @@
     <link rel="stylesheet" href="/assets/css/knowledge.css">
     <link rel="stylesheet" href="/assets/js/vendor/vis-network.min.css">
 
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
 </head>
 
 <body>
@@ -56,7 +58,19 @@
 
     </header>
 
-    <main>
+    <main id="knowledge-main" class="is-collapsed">
+
+        <aside id="markdown-panel" class="hidden">
+
+            <div id="markdown-content">
+
+                <p>Select a note...</p>
+
+            </div>
+
+        </aside>
+
+        <div id="panel-resizer" class="panel-resizer" aria-hidden="true"></div>
 
         <section class="graph-container">
 

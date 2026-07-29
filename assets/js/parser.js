@@ -48,7 +48,9 @@ function buildTree(files) {
         folders[categoryName].children.push({
 
             id: slug(`${categoryName}-${noteName}`),
-            name: noteName
+            name: noteName,
+            path: file.path,
+            sha: file.sha
 
         });
 
@@ -81,11 +83,13 @@ function buildGraphElements(tree) {
     };
 
     function traverse(node, parent = null) {
-
+        console.log(node);
         nodes.push({
             id: node.id,
             label: node.name,
-            type: node.children ? "folder" : "note"
+            type: node.children ? "folder" : "note",
+            path: node.path ?? null,
+            sha: node.sha ?? null
         });
 
         if (parent) {

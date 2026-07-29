@@ -6,11 +6,18 @@ function buildNodes(nodes) {
             const base = {
                 id: node.id,
                 label: node.label,
+
+                // Metadados
+                type: node.type,
+                path: node.path,
+                sha: node.sha,
+
                 font: {
                     face: 'Inter, system-ui, sans-serif',
                     color: '#E5E7EB',
                     size: 14
                 },
+
                 borderWidth: 0,
                 shadow: false
             };
@@ -178,13 +185,15 @@ function registerEvents(networkInstance, nodesDataSet) {
     });
 
     networkInstance.on('click', (params) => {
+
         if (params.nodes.length === 0) return;
+
+        console.log("ID:", params.nodes[0]);
 
         const node = nodesDataSet.get(params.nodes[0]);
 
-        if (typeof window.selectNode === 'function') {
-            window.selectNode(node);
-        }
+        console.log("NODE:", node);
+
     });
 
     networkInstance.on('doubleClick', (params) => {
