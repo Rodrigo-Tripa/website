@@ -20,7 +20,7 @@ function getGitHubHeaders() {
 async function fetchRepositoryTree() {
 
     const url =
-        `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/git/trees/${BRANCH}?recursive=1`;
+        `https://api.rodrigotripa.dev/repos/${REPO_OWNER}/${REPO_NAME}/git/trees/${BRANCH}?recursive=1`;
 
     const response = await fetch(url, { headers: getGitHubHeaders() });
 

@@ -230,8 +230,8 @@ function initializeUI(network, tree) {
         }
 
         const encodedPath = path.split("/").map(encodeURIComponent).join("/");
-        const metadataUrl = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${encodedPath}`;
-        const commitUrl = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/commits?path=${encodedPath}&per_page=1`;
+        const metadataUrl = `https://api.rodrigotripa.dev/repos/${REPO_OWNER}/${REPO_NAME}/contents/${encodedPath}`;
+        const commitUrl = `https://api.rodrigotripa.dev/repos/${REPO_OWNER}/${REPO_NAME}/commits?path=${encodedPath}&per_page=1`;
 
         const headers = typeof getGitHubHeaders === 'function' ? getGitHubHeaders() : {};
 
