@@ -73,6 +73,8 @@
 
         <aside id="markdown-panel" class="hidden">
 
+            <button type="button" class="panel-close" id="close-markdown" aria-label="Close notes panel">✕</button>
+
             <div id="markdown-content">
 
                 <p>Select a note...</p>
@@ -89,7 +91,9 @@
 
         </section>
 
-        <aside class="sidebar">
+        <aside class="sidebar" id="info-sidebar">
+
+            <button type="button" class="panel-close" id="close-sidebar" aria-label="Close info panel">✕</button>
 
             <h2>Knowledge Graph</h2>
 
@@ -112,6 +116,11 @@
         </aside>
 
     </main>
+
+    <div class="panel-backdrop" id="panel-backdrop"></div>
+
+    <button type="button" class="mobile-toggle mobile-toggle--notes" id="mobile-toggle-notes" aria-label="Open notes panel">📄</button>
+    <button type="button" class="mobile-toggle mobile-toggle--info" id="mobile-toggle-info" aria-label="Open info panel">ℹ️</button>
         <script src="assets/js/vendor/vis-network.min.js"></script>
 
         <script src="/assets/js/github.js"></script>
@@ -119,6 +128,7 @@
         <script src="/assets/js/graph.js"></script>
         <script src="/assets/js/ui.js"></script>
         <script src="/assets/js/knowledge.js"></script>
+        <script src="/assets/js/mobile-panels.js"></script>
 
 </body>
 

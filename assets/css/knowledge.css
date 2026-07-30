@@ -562,6 +562,235 @@ main.is-collapsed .panel-resizer {
 }
 
 /* ==========================================================
+   Mobile Layout (phones / small tablets)
+========================================================== */
+
+.mobile-toggle {
+
+    display: none;
+
+    position: fixed;
+
+    bottom: 1.1rem;
+
+    z-index: 1200;
+
+    width: 52px;
+    height: 52px;
+
+    border-radius: 50%;
+
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(20,20,20,.9);
+    backdrop-filter: blur(var(--blur));
+
+    border: 1px solid var(--border-hover);
+
+    color: var(--text);
+
+    font-size: 1.3rem;
+    line-height: 1;
+
+    box-shadow: 0 12px 30px rgba(0,0,0,.45);
+
+    cursor: pointer;
+
+}
+
+.mobile-toggle--notes { left: 1.1rem; }
+.mobile-toggle--info  { right: 1.1rem; }
+
+.panel-backdrop {
+
+    display: none;
+
+    position: fixed;
+    inset: 0;
+
+    background: rgba(0,0,0,.55);
+    backdrop-filter: blur(2px);
+
+    z-index: 1050;
+
+    opacity: 0;
+    transition: opacity .25s ease;
+
+}
+
+.panel-backdrop.is-visible {
+
+    opacity: 1;
+
+}
+
+.panel-close {
+
+    display: none;
+
+    align-self: flex-end;
+
+    width: 36px;
+    height: 36px;
+
+    border-radius: 50%;
+
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(255,255,255,.06);
+    border: 1px solid var(--border);
+    color: var(--text);
+
+    font-size: 1.1rem;
+
+    margin-bottom: 1rem;
+
+}
+
+@media (max-width: 760px) {
+
+    main {
+
+        grid-template-columns: 1fr;
+        grid-template-areas: "graph";
+
+        height: calc(100vh - 60px);
+
+    }
+
+    .panel-resizer {
+
+        display: none;
+
+    }
+
+    .topbar {
+
+        height: 60px;
+        padding: 0 1rem;
+
+    }
+
+    /* Markdown panel becomes a left-side drawer */
+    #markdown-panel {
+
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+
+        width: min(88vw, 380px);
+
+        z-index: 1100;
+
+        border-right: 1px solid var(--border);
+
+        transform: translateX(-100%);
+        opacity: 1;
+        pointer-events: auto;
+
+        padding: 1.25rem;
+        padding-top: calc(60px + 1rem);
+
+    }
+
+    #markdown-panel.mobile-open {
+
+        transform: translateX(0);
+
+    }
+
+    #markdown-panel.hidden {
+
+        /* on mobile "hidden" is controlled by mobile-open, not the desktop opacity rule */
+        transform: translateX(-100%);
+        opacity: 1;
+
+    }
+
+    /* Sidebar becomes a bottom sheet */
+    .sidebar {
+
+        display: flex;
+
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+
+        width: 100%;
+
+        max-height: 75vh;
+
+        border-left: none;
+        border-top: 1px solid var(--border);
+
+        border-radius: 20px 20px 0 0;
+
+        z-index: 1100;
+
+        transform: translateY(100%);
+        transition: transform .28s ease;
+
+    }
+
+    .sidebar.mobile-open {
+
+        transform: translateY(0);
+
+    }
+
+    .mobile-toggle {
+
+        display: flex;
+
+    }
+
+    .panel-backdrop.is-visible {
+
+        display: block;
+
+    }
+
+    .panel-close {
+
+        display: flex;
+
+    }
+
+    .graph-container {
+
+        grid-area: graph;
+
+    }
+
+    #cy {
+
+        height: 100%;
+
+    }
+
+}
+
+@media (max-width: 420px) {
+
+    #markdown-panel {
+
+        width: 100vw;
+
+    }
+
+    .sidebar-metrics-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
+
+/* ==========================================================
    Cytoscape Visual Theme
 ========================================================== */
 
