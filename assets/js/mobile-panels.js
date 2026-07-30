@@ -16,6 +16,7 @@
 
     function closeAll() {
         markdownPanel.classList.remove("mobile-open");
+        markdownPanel.classList.add("hidden");
         sidebar.classList.remove("mobile-open");
         backdrop.classList.remove("is-visible");
     }
@@ -23,6 +24,7 @@
     function openMarkdown() {
         if (!isMobile()) return;
         sidebar.classList.remove("mobile-open");
+        markdownPanel.classList.remove("hidden");
         markdownPanel.classList.add("mobile-open");
         backdrop.classList.add("is-visible");
     }

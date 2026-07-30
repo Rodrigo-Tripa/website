@@ -696,17 +696,14 @@ main.is-collapsed .panel-resizer {
 
     }
 
+    /* "mobile-open" manda sempre, independentemente da classe "hidden"
+       que o ui.js usa para o layout de desktop — evita o bug de duas
+       regras com a mesma especificidade a "lutarem" pela prioridade. */
     #markdown-panel.mobile-open {
 
-        transform: translateX(0);
-
-    }
-
-    #markdown-panel.hidden {
-
-        /* on mobile "hidden" is controlled by mobile-open, not the desktop opacity rule */
-        transform: translateX(-100%);
-        opacity: 1;
+        transform: translateX(0) !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
 
     }
 
