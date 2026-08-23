@@ -567,9 +567,12 @@ main.is-collapsed .panel-resizer {
 
 @media (max-width: 1000px) {
 
-    main {
+    main,
+    main.is-collapsed {
 
         grid-template-columns: 1fr;
+
+        grid-template-areas: "graph";
 
     }
 
@@ -621,6 +624,10 @@ main.is-collapsed .panel-resizer {
 
 .mobile-toggle--notes { left: 1.1rem; }
 .mobile-toggle--info  { right: 1.1rem; }
+.mobile-toggle.is-active {
+    border-color: var(--border-hover);
+    background: rgba(255,255,255,.12);
+}
 
 .panel-backdrop {
 
@@ -671,7 +678,8 @@ main.is-collapsed .panel-resizer {
 
 @media (max-width: 760px) {
 
-    main {
+    main,
+    main.is-collapsed {
 
         grid-template-columns: 1fr;
 
