@@ -173,14 +173,15 @@ function registerEvents(networkInstance, nodesDataSet) {
 
     networkInstance.on('hoverNode', (params) => {
         const node = nodesDataSet.get(params.node);
-        if (typeof window.updateSidebar === 'function') {
-            window.updateSidebar(node);
+
+        if (typeof window.handleNodeHover === 'function') {
+            window.handleNodeHover(node);
         }
     });
 
     networkInstance.on('blurNode', () => {
-        if (typeof window.clearSidebar === 'function') {
-            window.clearSidebar();
+        if (typeof window.handleNodeBlur === 'function') {
+            window.handleNodeBlur();
         }
     });
 

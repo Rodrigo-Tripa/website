@@ -6,6 +6,12 @@ const metadataCache = new Map();
 // Track currently selected node in sidebar to avoid redundant updates
 let currentSelectedNodeId = null;
 
+let hoveredNodeId = null;
+let hoverTimer = null;
+let hideTimer = null;
+let lockedByClick = false;
+let sidebarGeneration = 0;
+
 function initializeUI(network, tree) {
 
     const main = document.getElementById("knowledge-main");
@@ -435,6 +441,88 @@ function initializeUI(network, tree) {
 
         renderFolderSidebar(node);
     }
+    function cancelHoverTimer() {
+
+        if (hoverTimer) {
+            clearTimeout(hoverTimer);
+            hoverTimer = null;
+        }
+
+    }
+
+    function cancelHideTimer() {
+
+        if (hideTimer) {
+            clearTimeout(hideTimer);
+            hideTimer = null;
+        }
+
+    }
+
+    function scheduleHoverNode(node) {
+
+        cancelHoverTimer();
+
+        hoveredNodeId = node.id;
+
+        const delay = lockedByClick ? 1000 : 700;
+
+        hoverTimer = setTimeout(() => {
+
+            hoverTimer = null;
+
+            if (hoveredNodeId !== node.id) {
+                return;
+            }
+
+            cancelHideTimer();
+
+            if (lockedByClick) {
+                lockedByClick = false;
+            }
+
+            updateSidebar(node);
+
+        }, delay);
+
+    }
+
+    function handleNodeBlur() {
+
+        hoveredNodeId = null;
+
+        cancelHoverTimer();
+
+        if (lockedByClick) {
+            return;
+        }
+
+        cancelHideTimer();
+
+        hideTimer = setTimeout(() => {
+
+            if (!lockedByClick && hoveredNodeId === null) {
+                clearSidebar();
+            }
+
+            hideTimer = null;
+
+        }, 3000);
+
+    }
+
+    function handleNodeHover(node) {
+
+        if (!node) {
+            return;
+        }
+
+        scheduleHoverNode(node);
+
+    }
+
+    window.handleNodeHover = handleNodeHover;
+    window.handleNodeBlur = handleNodeBlur;
 
     window.updateSidebar = (node, markdown = null) => {
         renderSidebar(node, markdown);
@@ -486,15 +574,25 @@ function initializeUI(network, tree) {
 
     network.on("click", async (params) => {
 
+        cancelHoverTimer();
+        cancelHideTimer();
+
+        hoveredNodeId = null;
+
         if (params.nodes.length === 0) {
             currentSelectedNodeId = null;
+            lockedByClick = false;
+
             clearSidebar();
             setPanelState(false);
+
             return;
         }
 
         const id = params.nodes[0];
         const node = network.body.data.nodes.get(id);
+
+        lockedByClick = true;
 
         // Only update sidebar if clicking a different node
         const nodeChanged = currentSelectedNodeId !== id;
@@ -510,7 +608,19 @@ function initializeUI(network, tree) {
 
         setPanelState(true);
         const markdown = await fetchMarkdown(node.path);
-        markdownContent.innerHTML = marked.parse(markdown);
+
+        if (!markdown || !markdown.trim()) {
+            markdownContent.innerHTML = `
+                <div class="empty-note">
+                    <img src="/assets/images/write.png" alt="">
+                    <h2>This note is currently empty.</h2>
+                    <p>Content will appear here once this note is written.</p>
+                </div>
+            `;
+        } else {
+            markdownContent.innerHTML = marked.parse(markdown);
+        }
+
         if (nodeChanged) {
             renderSidebar(node, markdown);
         }
