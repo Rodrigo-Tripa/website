@@ -150,8 +150,12 @@
 }
 
 .archive-container {
+    width: 100%;
+}
+
+.archive-year-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1rem;
 }
 
@@ -217,6 +221,84 @@
 .archive-card:hover .archive-link::after {
     transform: translateX(2px);
 }
+
+
+/* ==========================================================
+   Archive Pagination
+========================================================== */
+
+.archive-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .55rem;
+    margin-top: 2rem;
+}
+
+.archive-pagination-pages {
+    display: flex;
+    align-items: center;
+    gap: .55rem;
+}
+
+.archive-pagination button {
+    min-width: 3.5rem;
+    height: 3.5rem;
+    padding: 0 .9rem;
+
+    border: 1px solid var(--border-color);
+    border-radius: .35rem;
+
+    background: rgba(255, 255, 255, .035);
+    color: var(--text-primary);
+
+    font: inherit;
+    font-size: 1rem;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background .2s ease,
+        border-color .2s ease,
+        color .2s ease,
+        transform .2s ease;
+}
+
+.archive-pagination button:hover:not(:disabled) {
+    border-color: rgba(255, 255, 255, .14);
+    background: rgba(255, 255, 255, .07);
+    transform: translateY(-1px);
+}
+
+.archive-pagination button.active {
+    border-color: transparent;
+    background: #ff9d00;
+    color: #050505;
+}
+
+.archive-pagination button:disabled {
+    opacity: .35;
+    cursor: not-allowed;
+}
+
+.archive-pagination-control {
+    min-width: 7rem !important;
+}
+
+.archive-pagination-ellipsis {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 1.5rem;
+    height: 3.5rem;
+
+    color: var(--text-muted);
+    font-size: 1rem;
+    font-weight: 600;
+}
+
 
 /* ==========================================================
    Coverage
@@ -398,6 +480,10 @@
         font-size: 1.75rem;
     }
 
+    .archive-year-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
 }
 
 @media (max-width: 768px) {
@@ -466,6 +552,33 @@
 
     .edition-card h3 {
         font-size: 1.4rem;
+    }
+
+    .archive-year-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .archive-pagination {
+        gap: .35rem;
+    }
+
+    .archive-pagination-pages {
+        gap: .35rem;
+    }
+
+    .archive-pagination button {
+        min-width: 2.8rem;
+        height: 3rem;
+        padding: 0 .65rem;
+        font-size: .9rem;
+    }
+
+    .archive-pagination-control {
+        min-width: 4.5rem !important;
+    }
+
+    .archive-pagination-ellipsis {
+        height: 3rem;
     }
 
 }

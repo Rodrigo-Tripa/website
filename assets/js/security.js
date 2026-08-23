@@ -27,6 +27,9 @@ document.addEventListener("DOMContentLoaded", () => {
     */
 
     let archive = [];
+    let currentArchivePage = 1;
+
+    const ARCHIVE_ITEMS_PER_PAGE = 6;
 
     /*
     ==========================================================
@@ -324,90 +327,264 @@ document.addEventListener("DOMContentLoaded", () => {
 
         }
 
-        const groupedByYear = new Map();
+        const totalPages = Math.ceil(
+            archive.length / ARCHIVE_ITEMS_PER_PAGE
+        );
 
-        archive.forEach(entry => {
+        if (currentArchivePage > totalPages) {
+            currentArchivePage = totalPages;
+        }
 
-            const year = String(entry.year || new Date(getReportDate(entry) || Date.now()).getFullYear());
+        const startIndex =
+            (currentArchivePage - 1) * ARCHIVE_ITEMS_PER_PAGE;
 
-            if (!groupedByYear.has(year)) {
-                groupedByYear.set(year, []);
-            }
+        const endIndex =
+            startIndex + ARCHIVE_ITEMS_PER_PAGE;
 
-            groupedByYear.get(year).push(entry);
+        const pageItems = archive.slice(startIndex, endIndex);
 
-        });
+        const cards = pageItems.map(entry => {
 
-        const years = Array.from(groupedByYear.keys())
-            .sort((a, b) => Number(b) - Number(a));
-
-        archiveContainer.innerHTML = years.map(year => {
-
-            const items = groupedByYear.get(year);
-
-            const cards = items.map(entry => {
-                const url = sanitizePath(getReportUrl(entry));
-                const title = escapeHTML(getReportTitle(entry));
-                const summary = escapeHTML(getSummary(entry));
-                const edition = escapeHTML(formatEdition(entry.edition));
-                const week = escapeHTML(formatWeek(entry.week));
-                const published = escapeHTML(formatDate(getReportDate(entry)));
-                const threatLevel = escapeHTML(threatLevelLabel(getThreatLevel(entry)));
-
-                return `
-                    <article class="archive-card">
-                        <div>
-                            <span class="edition">
-                                ${edition}
-                            </span>
-
-                            <h3>
-                                ${title}
-                            </h3>
-
-                            <p>
-                                ${week} • ${published}
-                            </p>
-
-                            <p>
-                                ${summary}
-                            </p>
-
-                            <p>
-                                Threat Level: ${threatLevel}
-                            </p>
-                        </div>
-
-                        <a
-                            href="${url}"
-                            class="archive-link">
-                            Read
-                        </a>
-                    </article>
-                `;
-            }).join("");
+            const url = sanitizePath(getReportUrl(entry));
+            const title = escapeHTML(getReportTitle(entry));
+            const summary = escapeHTML(getSummary(entry));
+            const edition = escapeHTML(formatEdition(entry.edition));
+            const week = escapeHTML(formatWeek(entry.week));
+            const published = escapeHTML(formatDate(getReportDate(entry)));
+            const threatLevel = escapeHTML(
+                threatLevelLabel(getThreatLevel(entry))
+            );
 
             return `
-                <section class="archive-year">
-                    <div class="section-header">
-                        <span class="section-tag">
-                            ${escapeHTML(year)}
+                <article class="archive-card">
+
+                    <div>
+
+                        <span class="edition">
+                            ${edition}
                         </span>
 
                         <h3>
-                            ${escapeHTML(year)}
+                            ${title}
                         </h3>
+
+                        <p>
+                            ${week} • ${published}
+                        </p>
+
+                        <p>
+                            ${summary}
+                        </p>
+
+                        <p>
+                            Threat Level: ${threatLevel}
+                        </p>
+
                     </div>
 
-                    <div class="archive-year-grid">
-                        ${cards}
-                    </div>
-                </section>
+                    <a
+                        href="${url}"
+                        class="archive-link">
+                        Read
+                    </a>
+
+                </article>
             `;
 
         }).join("");
 
+        archiveContainer.innerHTML = `
+            <div class="archive-year">
+
+                <div class="section-header">
+
+                    <span class="section-tag">
+                        ${escapeHTML(
+                            String(
+                                pageItems[0]?.year ||
+                                new Date().getFullYear()
+                            )
+                        )}
+                    </span>
+
+                    <h3>
+                        ${escapeHTML(
+                            String(
+                                pageItems[0]?.year ||
+                                new Date().getFullYear()
+                            )
+                        )}
+                    </h3>
+
+                </div>
+
+                <div class="archive-year-grid">
+                    ${cards}
+                </div>
+
+            </div>
+
+            ${renderPagination(totalPages)}
+        `;
+
+        bindPaginationEvents(totalPages);
+
     }
+
+    function renderPagination(totalPages) {
+
+        if (totalPages <= 1) {
+            return "";
+        }
+
+        const pageButtons = [];
+
+        function addPage(page) {
+
+            const activeClass =
+                page === currentArchivePage
+                    ? " active"
+                    : "";
+
+            pageButtons.push(`
+                <button
+                    type="button"
+                    class="archive-page${activeClass}"
+                    data-page="${page}"
+                    aria-label="Go to page ${page}"
+                    ${page === currentArchivePage ? "aria-current=\"page\"" : ""}>
+                    ${page}
+                </button>
+            `);
+
+        }
+
+        function addEllipsis() {
+
+            pageButtons.push(`
+                <span
+                    class="archive-pagination-ellipsis"
+                    aria-hidden="true">
+                    …
+                </span>
+            `);
+
+        }
+
+        if (totalPages <= 7) {
+
+            for (let page = 1; page <= totalPages; page++) {
+                addPage(page);
+            }
+
+        } else {
+
+            addPage(1);
+            addPage(2);
+            addPage(3);
+            addPage(4);
+            addPage(5);
+
+            if (currentArchivePage > 6 && currentArchivePage < totalPages - 1) {
+                addEllipsis();
+                addPage(currentArchivePage);
+            } else {
+                addEllipsis();
+            }
+
+            addPage(totalPages);
+
+        }
+
+        return `
+            <nav
+                class="archive-pagination"
+                aria-label="Weekly Archive pagination">
+
+                <button
+                    type="button"
+                    class="archive-pagination-control"
+                    data-page="${currentArchivePage - 1}"
+                    ${currentArchivePage === 1 ? "disabled" : ""}
+                    aria-label="Previous page">
+
+                    Prev
+
+                </button>
+
+                <div class="archive-pagination-pages">
+
+                    ${pageButtons.join("")}
+
+                </div>
+
+                <button
+                    type="button"
+                    class="archive-pagination-control"
+                    data-page="${currentArchivePage + 1}"
+                    ${currentArchivePage === totalPages ? "disabled" : ""}
+                    aria-label="Next page">
+
+                    Next
+
+                </button>
+
+            </nav>
+        `;
+
+    }
+
+
+    function bindPaginationEvents(totalPages) {
+
+        const pagination =
+            archiveContainer.querySelector(".archive-pagination");
+
+        if (!pagination) {
+            return;
+        }
+
+        const buttons =
+            pagination.querySelectorAll("[data-page]");
+
+        buttons.forEach(button => {
+
+            button.addEventListener("click", () => {
+
+                const targetPage =
+                    Number(button.dataset.page);
+
+                if (
+                    Number.isNaN(targetPage) ||
+                    targetPage < 1 ||
+                    targetPage > totalPages ||
+                    targetPage === currentArchivePage
+                ) {
+                    return;
+                }
+
+                currentArchivePage = targetPage;
+
+                renderArchive();
+
+                const archiveSection =
+                    document.querySelector(".archive");
+
+                if (archiveSection) {
+
+                    archiveSection.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start"
+                    });
+
+                }
+
+            });
+
+        });
+
+    }
+
 
     /*
     ==========================================================

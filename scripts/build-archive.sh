@@ -12,6 +12,8 @@ find security -name metadata.json | sort | while read META
 do
 
     DIR=$(dirname "$META")
+    EDITION_PATH="${DIR#security/}"
+    URL="/report.html?edition=${EDITION_PATH}"
 
     if [ "$FIRST" = true ]; then
         FIRST=false
@@ -20,7 +22,7 @@ do
     fi
 
     jq \
-        --arg url "/$DIR/index.md" \
+        --arg url "$URL" \
         '. + {url:$url}' \
         "$META" >> "$TMP"
 
