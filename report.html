@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <meta name="robots" content="noindex, follow">
 
     <meta charset="UTF-8">
 
@@ -40,6 +41,7 @@
     <link
         rel="canonical"
         href="https://rodrigotripa.dev/report.html">
+    <link rel="describedby" href="/llms.txt">
 
     <meta
         property="og:type"
@@ -408,6 +410,15 @@
         src="/assets/js/vendor/marked.min.js"
         defer></script>
 
+
+<script id="legacy-report-redirect">
+(function () {
+  const edition = new URLSearchParams(location.search).get('edition');
+  if (!edition || !/^\d{4}\/week-\d{2}$/.test(edition)) return;
+  const target = '/security/' + edition + '/';
+  if (location.pathname !== target) window.location.replace(target);
+})();
+</script>
 </head>
 
 <body class="report-page">

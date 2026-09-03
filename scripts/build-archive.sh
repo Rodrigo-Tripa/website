@@ -1,19 +1,19 @@
 #!/usr/bin/env bash
 
-set -e
+set -euo pipefail
 
 TMP=$(mktemp)
+trap 'rm -f "$TMP"' EXIT
 
 echo "[" > "$TMP"
 
 FIRST=true
 
-find security -name metadata.json | sort | while read META
+while IFS= read -r META
 do
-
     DIR=$(dirname "$META")
     EDITION_PATH="${DIR#security/}"
-    URL="/report.html?edition=${EDITION_PATH}"
+    URL="/security/${EDITION_PATH}/"
 
     if [ "$FIRST" = true ]; then
         FIRST=false
@@ -21,15 +21,11 @@ do
         echo "," >> "$TMP"
     fi
 
-    jq \
-        --arg url "$URL" \
-        '. + {url:$url}' \
-        "$META" >> "$TMP"
-
-done
+    jq --arg url "$URL" '. + {url:$url}' "$META" >> "$TMP"
+done < <(find security -name metadata.json -print | sort)
 
 echo "]" >> "$TMP"
 
 mv "$TMP" security/archive.json
 
-echo "[✓] archive.json rebuilt."
+echo "[✓] security/archive.json rebuilt with canonical report URLs."

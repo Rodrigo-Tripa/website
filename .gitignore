@@ -11,8 +11,6 @@ Thumbs.db
 
 .vscode/
 .idea/
-
-# Vim
 *.swp
 *.swo
 *~
@@ -31,7 +29,7 @@ Thumbs.db
 .env.*
 
 # ==========================
-# Node (caso uses no futuro)
+# Node
 # ==========================
 
 node_modules/
@@ -44,10 +42,17 @@ dist/
 build/
 
 # ==========================
-# Cache
+# Cache / local scratch
 # ==========================
 
 .cache/
 fix-mobile-menu.sh
 ttt.txt
-assets/css/style.css.bak
+
+# ==========================
+# Backups
+# ==========================
+
+*.bak
+*.backup
+*.old

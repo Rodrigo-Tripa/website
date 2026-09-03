@@ -1,11 +1,22 @@
-# robots.txt for https://rodrigotripa.dev
-# Allow all search engines to crawl the website.
+# Robots policy for https://rodrigotripa.dev
+# Public content is intended to be discoverable by search engines and AI search systems.
 
 User-agent: *
 Allow: /
 
-# Sitemap
-Sitemap: https://rodrigotripa.dev/sitemap.xml
+User-agent: Googlebot
+Allow: /
 
-# Host
-Host: rodrigotripa.dev
+User-agent: Bingbot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: OAI-AdsBot
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+Sitemap: https://rodrigotripa.dev/sitemap.xml

@@ -1,0 +1,6 @@
+Delete these tracked files from the repository:
+
+report.html.bak
+research.html.bak
+
+Also remove any other backup/scratch files that are accidentally deployed, especially files ending in .bak, .backup or .old.

@@ -1,11 +1,5 @@
-:::writing{variant="document" id="58321" title="security.txt"}
 Contact: mailto:security@rodrigotripa.dev
-
-Expires: 2027-12-31T23:59:59Z
-
+Expires: 2027-09-03T00:00:00Z
 Preferred-Languages: en, pt
-
 Canonical: https://rodrigotripa.dev/.well-known/security.txt
-
-Policy: https://rodrigotripa.dev/
-:::
+Policy: https://rodrigotripa.dev/security.html

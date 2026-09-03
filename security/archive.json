@@ -8,7 +8,7 @@
   "published": "2026-07-29",
   "readingTime": 12,
   "threatLevel": "High",
-  "url": "/report.html?edition=2026/week-31"
+  "url": "/security/2026/week-31/"
 }
 ,
 {
@@ -20,7 +20,7 @@
   "published": "2026-08-09",
   "readingTime": 15,
   "threatLevel": "High",
-  "url": "/report.html?edition=2026/week-32"
+  "url": "/security/2026/week-32/"
 }
 ,
 {
@@ -32,7 +32,7 @@
   "published": "2026-08-16",
   "readingTime": 13,
   "threatLevel": "Critical",
-  "url": "/report.html?edition=2026/week-33"
+  "url": "/security/2026/week-33/"
 }
 ,
 {
@@ -44,7 +44,7 @@
   "published": "2026-08-23",
   "readingTime": 13,
   "threatLevel": "Critical",
-  "url": "/report.html?edition=2026/week-34"
+  "url": "/security/2026/week-34/"
 }
 ,
 {
@@ -56,6 +56,6 @@
   "published": "2026-08-30",
   "readingTime": 15,
   "threatLevel": "Critical",
-  "url": "/report.html?edition=2026/week-35"
+  "url": "/security/2026/week-35/"
 }
 ]
